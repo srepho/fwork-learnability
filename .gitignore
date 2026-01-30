@@ -44,3 +44,6 @@ Thumbs.db
 .coverage
 htmlcov/
 .pytest_cache/
+
+# Claude Code session notes
+CLAUDE.md
