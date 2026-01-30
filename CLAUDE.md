@@ -4,166 +4,134 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a research project for measuring **LLM-assisted framework usability** - how easily an LLM can produce working code with various agent frameworks given access to documentation. The methodology benchmarks frameworks including PydanticAI, Haystack, LangGraph, OpenAI Agents SDK, Anthropic Agents SDK, Microsoft Agent Framework, and Direct API baseline.
+This is a research project for measuring **LLM-assisted framework usability** - how easily an LLM can produce working code with various agent frameworks given access to documentation.
 
-## Implementation Status
+**GitHub Repo**: https://github.com/srepho/fwork-learnability
 
-**Phase 1: Core Infrastructure ✅ COMPLETE**
-- LLM client layer (DeepSeek V3)
-- Code extraction from markdown responses
-- Sandbox execution (subprocess-based)
-- Conversation loop with "Fresh Start with Error"
+## Current Status: Phase 1 Complete
 
-**Phase 2: Documentation & Compliance ✅ COMPLETE**
-- Documentation corpus management
-- Markdown normalization
-- Static compliance checking (imports, symbols)
-- Dynamic compliance checking (entrypoint verification)
+### What Was Accomplished
 
-**Phase 3: Tasks & Testing ✅ COMPLETE**
-- Tier 1: Claims Classification (5 dev, 12 hidden tests)
-- Tier 2: Claims Tool Use (5 dev tests)
-- Tier 3: Claims Agent (5 dev tests)
+1. **Core Infrastructure** ✅
+   - LLM client (DeepSeek V3 with temperature=0)
+   - Code extraction from markdown responses
+   - Sandbox execution (subprocess-based isolation)
+   - Conversation loop with "Fresh Start with Error" context management
+   - Compliance checking (static + dynamic)
+   - Error analysis and hallucination detection
+   - Survival analysis (Kaplan-Meier)
 
-**Phase 4: Analysis & Metrics ✅ COMPLETE**
-- Error categorization (7 categories)
-- Hallucination detection (invented vs version conflict)
-- Metrics computation
-- Survival analysis (Kaplan-Meier)
+2. **Task Definitions** ✅
+   - Tier 1: Claims Classification (5 dev tests, 12 hidden tests)
+   - Tier 2: Claims Tool Use (defined, not tested)
+   - Tier 3: Claims Agent (defined, not tested)
 
-**Phase 5: Integration ✅ COMPLETE**
-- Trial logging (JSON)
-- Experiment runner with progress tracking
-- Visualization scripts
+3. **Experiments Run** ✅
+   - 48 trials across 4 frameworks (PydanticAI, Haystack, LangGraph, Direct API)
+   - 4 documentation levels (none, minimal, moderate, full)
+   - 3 runs per condition
 
-## Current Phase: Pilot Complete, Expanding
+### Experiment Results Summary
 
-### Experiment Results (48 trials across 4 frameworks)
-- **Model**: DeepSeek V3 (`deepseek-chat`)
-- **Task**: Tier 1 Claims Classification
+| Framework | Success Rate | Avg Turns | Best Doc Level |
+|-----------|-------------|-----------|----------------|
+| PydanticAI | 92% (11/12) | 3.4 | moderate |
+| Direct API | 83% (10/12) | 2.4 | moderate |
+| LangGraph | 83% (10/12) | 4.7 | minimal |
+| Haystack | 75% (9/12) | 3.0 | minimal |
 
-| Framework | Success Rate | Avg Turns | First Attempt | Best Doc Level |
-|-----------|-------------|-----------|---------------|----------------|
-| PydanticAI | 92% (11/12) | 3.4 | 3 | moderate |
-| Direct API | 83% (10/12) | 2.4 | 1 | moderate |
-| LangGraph | 83% (10/12) | 4.7 | 0 | minimal |
-| Haystack | 75% (9/12) | 3.0 | 3 | minimal |
+### Key Findings
 
-**Key Findings:**
-1. **High Contamination**: All frameworks succeeded 2-3/3 at doc level "none" - DeepSeek V3 likely has all frameworks in training data
-2. **Minimal docs often best**: Haystack and LangGraph performed best with minimal docs, not full docs
-3. **PydanticAI most reliable**: Highest success rate overall
-4. **Direct API fastest**: Lowest average turns (2.4), but no framework overhead benefits
+1. **High Contamination**: All frameworks succeeded at "none" doc level (2-3/3) - DeepSeek V3 has these frameworks in training data
 
-### Error Analysis (8/48 failures = 17%)
+2. **Documentation Paradox**: Minimal docs often outperformed full docs
+   - Haystack: minimal (100%) > full (33%)
+   - Root cause: Doc fetching captured landing pages, not tutorials
 
-**Failure Distribution:**
-| Framework | Failures | Main Errors |
-|-----------|----------|-------------|
-| Haystack | 3/12 | SyntaxError loop, AttributeError |
-| Direct API | 2/12 | SyntaxError loop |
-| LangGraph | 2/12 | ModuleNotFound → SyntaxError |
-| PydanticAI | 1/12 | API hallucination (result_type) |
+3. **Error Patterns** (8/48 failures):
+   - SyntaxError loop (40 occurrences): Model gets stuck on unterminated strings
+   - API hallucinations (26): PydanticAI `result_type` doesn't exist
+   - Logic errors (15): Wrong classification despite working code
 
-**Root Causes:**
-1. **Syntax Error Loop** (most common): Model generates code with unterminated strings, then fails to recover for 10 turns
-2. **API Hallucinations**: PydanticAI `result_type` (15x), Haystack `resolve_value` (8x)
-3. **Full Docs Hurt**: Fetched landing pages, not tutorials - marketing content confuses model
+## Known Issues to Fix
 
-### Next Steps
-1. Improve doc fetching to get actual code examples
-2. Add better syntax error recovery feedback
-3. Run Tier 2/3 tasks
-4. Consider older model for cleaner temporal firewall
+### 1. Documentation Fetching (HIGH PRIORITY)
+The current doc fetcher gets landing pages instead of actual tutorials:
+- Haystack "full" docs = 26 lines of marketing, no code
+- Need to fetch actual quickstart pages with code examples
+- Consider manual curation of doc snippets
 
-## Core Methodology
+**Location**: `scripts/fetch_docs.py`, `src/docs/`
 
-The "Turns to Working Code" loop:
-1. Initialize with task description + framework documentation
-2. LLM generates implementation attempt
-3. Run against test suite
-4. If tests fail, feed error back (max 10 turns)
-5. Record metrics (turns to success, hallucination rate, error types)
+### 2. Syntax Error Recovery
+Model gets stuck in SyntaxError loops (10 turns of same error):
+- Need better error feedback showing the specific problematic line
+- Consider detecting when model is "stuck" making same mistake
 
-**Context Management:** Use "Fresh Start with Error" - each turn sees only: original task, docs, previous code, and previous error. Do not accumulate failed attempts.
+**Location**: `src/harness/conversation.py`
 
-## Key Design Decisions
-
-- **Temporal Firewall:** Use DeepSeek V3 (training cutoff Dec 2024) to test frameworks released after this date
-- **Three Task Tiers:** Tier 1 (classification), Tier 2 (tool use), Tier 3 (agent-native)
-- **Hidden Test Sets:** Development set (5 cases) for error feedback, hidden set (10+) for final scoring
-- **Framework Compliance Gates:** Static/dynamic checks to ensure LLM doesn't bypass the framework
+### 3. Contamination Control
+DeepSeek V3 (Dec 2024 cutoff) knows these frameworks:
+- Consider using an older model
+- Or focus on frameworks released after Dec 2024
 
 ## Project Structure
 
 ```
 fwork_learnability/
 ├── src/
-│   ├── harness/           # Core test harness (runner, conversation, sandbox, extractor)
-│   ├── docs/              # Documentation management (normalizer, corpus)
-│   ├── compliance/        # Framework compliance (static, dynamic)
-│   ├── analysis/          # Metrics & analysis (errors, hallucination, metrics, survival)
-│   ├── llm/               # LLM clients (DeepSeek V3)
-│   └── tasks/             # Task definitions (tier1, tier2, tier3)
+│   ├── harness/           # runner.py, conversation.py, sandbox.py, extractor.py
+│   ├── docs/              # corpus.py, normalizer.py
+│   ├── compliance/        # static.py, dynamic.py
+│   ├── analysis/          # errors.py, hallucination.py, metrics.py, survival.py
+│   ├── llm/               # base.py, deepseek.py
+│   └── tasks/             # tier1/, tier2/, tier3/
 ├── tests/                 # Unit tests
+├── results/               # Experiment JSON logs
+├── visualizations/        # Generated charts
 ├── docs_corpus/           # Snapshotted documentation
-├── results/               # Experiment results
-├── config/                # Configuration (frameworks.yaml)
-├── scripts/               # CLI utilities (run_experiment, fetch_docs, setup_venvs, visualize)
-└── venvs/                 # Framework virtual environments
+├── scripts/               # CLI utilities
+└── config/                # frameworks.yaml
 ```
 
-## Metrics
+## Environment Setup
 
-| Metric | Purpose |
-|--------|---------|
-| Turns to Success | Survival analysis (Kaplan-Meier) treating failures as censored |
-| Success@None | Contamination detection - did it work without docs? |
-| Symbol Exactness | Did it guess or memorize API calls? |
-| Hallucination (Invented vs Version Conflict) | Unintuitive API vs breaking changes |
-| Meaningful Error Rate | Actionable errors in turns 1-2 |
-| Self-Correction Ratio | Does LLM adapt or repeat mistakes? |
-
-## Documentation Levels
-
-| Level | Content |
-|-------|---------|
-| None | Framework name only |
-| Minimal | One-paragraph + install command |
-| Moderate | Official quickstart + core concepts |
-| Full | Above + tool use section + API reference |
-
-## Error Categories
-
-Import, Dependency, Type, Runtime, Logic, Hallucination, Syntax - track framework-specific exceptions separately from standard Python errors.
-
-## Environment Configuration
-
-**Use conda for Python environments.** Create and activate a project-specific environment:
 ```bash
-conda create -n fwork_learn python=3.11
-conda activate fwork_learn
+# Create venv and install
+python -m venv .venv
+source .venv/bin/activate
 pip install -e .
-```
 
-Required environment variable:
-- `DEEPSEEK_API_KEY` - Primary model for experiments (DeepSeek V3)
+# Configure API key
+cp .env.example .env
+# Edit .env with DEEPSEEK_API_KEY
 
-## Running Commands
-
-```bash
 # Setup framework venvs
-python scripts/setup_venvs.py --frameworks pydantic-ai direct-api
-
-# Fetch documentation
-python scripts/fetch_docs.py --frameworks pydantic-ai
+python scripts/setup_venvs.py --frameworks pydantic-ai haystack langgraph direct-api
 
 # Run experiment
-python scripts/run_experiment.py --frameworks pydantic-ai --tiers 1 --runs 5
-
-# Visualize results
-python scripts/visualize.py <experiment_id>
-
-# Run tests
-pytest tests/ -v
+python scripts/run_experiment.py --frameworks pydantic-ai --tiers 1 --runs 3
 ```
+
+## Next Steps (Priority Order)
+
+1. **Fix doc fetching** - Get actual code examples, not landing pages
+2. **Run Tier 2/3 tasks** - Test tool use and agent-native capabilities
+3. **Improve error recovery** - Better syntax error feedback
+4. **Add more frameworks** - Anthropic Agents SDK, OpenAI Agents SDK
+5. **Statistical analysis** - More runs for significance testing
+
+## Key Files for Common Tasks
+
+| Task | Files |
+|------|-------|
+| Add new framework | `config/frameworks.yaml`, `src/compliance/static.py` |
+| Add new task | `src/tasks/tierN/` |
+| Modify conversation loop | `src/harness/conversation.py` |
+| Improve doc fetching | `scripts/fetch_docs.py`, `src/docs/corpus.py` |
+| Analyze results | `scripts/visualize.py`, `src/analysis/` |
+
+## API Keys Required
+
+- `DEEPSEEK_API_KEY` - Primary model for experiments (required)
+- Other keys in `.env` are optional for future framework testing
