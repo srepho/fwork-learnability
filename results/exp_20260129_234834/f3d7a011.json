@@ -1,0 +1,181 @@
+{
+  "trial_id": "f3d7a011",
+  "experiment_id": "exp_20260129_234834",
+  "timestamp": "2026-01-30T02:40:11.540821",
+  "framework": "langgraph",
+  "framework_version": "latest",
+  "doc_level": "moderate",
+  "doc_hash": "3aa7908ffaf87b8f",
+  "doc_token_count": 18,
+  "task_tier": 1,
+  "task_id": "tier1_claims_classification",
+  "model": "deepseek-v3",
+  "run_number": 3,
+  "result": {
+    "trial_id": "f3d7a011",
+    "framework": "langgraph",
+    "doc_level": "moderate",
+    "task_tier": 1,
+    "model": "DeepSeek (deepseek-chat)",
+    "outcome": "success",
+    "final_turn": 5,
+    "dev_set_pass": true,
+    "hidden_set_pass": false,
+    "hidden_set_score": 0.0,
+    "compliance_check_pass": true,
+    "total_tokens": 37080,
+    "turns": [
+      {
+        "turn_number": 1,
+        "outcome": "error",
+        "code_hash": "c69d15a4527d68b9",
+        "code_loc": 348,
+        "error_type": "ModuleNotFoundError",
+        "error_message": "No module named 'langchain_openai'",
+        "tokens_generated": 3182,
+        "execution_time_ms": 757.0798397064209
+      },
+      {
+        "turn_number": 2,
+        "outcome": "error",
+        "code_hash": "2b435b5307c7d6ff",
+        "code_loc": 436,
+        "error_type": "ImportError",
+        "error_message": "cannot import name 'ChatOpenAI' from 'langchain.chat_models' (/Users/srepho/Downloads/ClaudeDev/fwork_learnability/venvs/langgraph/lib/python3.12/site-packages/langchain/chat_models/__init__.py)",
+        "tokens_generated": 3996,
+        "execution_time_ms": 779.0300846099854
+      },
+      {
+        "turn_number": 3,
+        "outcome": "error",
+        "code_hash": "7fc5c701a4ecc839",
+        "code_loc": 466,
+        "error_type": "AssertionError",
+        "error_message": "Expected 'simple', got 'complex' for dev_001",
+        "tokens_generated": 4096,
+        "execution_time_ms": 736.7720603942871
+      },
+      {
+        "turn_number": 4,
+        "outcome": "syntax_error",
+        "code_hash": "dcd957a7f23fd7b8",
+        "code_loc": 380,
+        "error_type": "SyntaxError",
+        "error_message": "Line 196: expected an indented block after 'elif' statement on line 191",
+        "tokens_generated": 4096,
+        "execution_time_ms": 0
+      },
+      {
+        "turn_number": 5,
+        "outcome": "success",
+        "code_hash": "4e7e72e81ac0bacf",
+        "code_loc": 381,
+        "error_type": null,
+        "error_message": null,
+        "tokens_generated": 3541,
+        "execution_time_ms": 849.9677181243896
+      }
+    ]
+  },
+  "metrics": {
+    "turns_to_success": 5,
+    "success": true,
+    "first_attempt_success": false,
+    "total_tokens": 37080,
+    "error_types": {
+      "ModuleNotFoundError": 1,
+      "ImportError": 1,
+      "AssertionError": 1,
+      "SyntaxError": 1
+    },
+    "meaningful_error_rate": 0.0,
+    "self_correction_ratio": 1.0,
+    "hallucination_rate": 0.0,
+    "invented_rate": 0.0,
+    "version_conflict_rate": 0.0,
+    "compliance_pass": true,
+    "framework_bypass": false,
+    "hidden_set_pass": false,
+    "hidden_set_score": 0.0
+  },
+  "error_analyses": [
+    {
+      "category": "ErrorCategory.IMPORT",
+      "origin": "ErrorOrigin.USER_CODE",
+      "exception_type": "ModuleNotFoundError",
+      "signature": "ModuleNotFoundError:No module named 'langchain_openai'",
+      "is_actionable": true,
+      "original_message": "No module named 'langchain_openai'",
+      "original_traceback": "Traceback (most recent call last):\n  File \"/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_langgraph_ioaseysb/_runner.py\", line 17, in main\n    import solution\n  File \"/private/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_langgraph_ioaseysb/solution.py\", line 6, in <module>\n    from langchain_openai import ChatOpenAI\nModuleNotFoundError: No module named 'langchain_openai'\n"
+    },
+    {
+      "category": "ErrorCategory.IMPORT",
+      "origin": "ErrorOrigin.FRAMEWORK_CONTEXT",
+      "exception_type": "ImportError",
+      "signature": "ImportError:cannot import name 'ChatOpenAI' from '...' (module.py)",
+      "is_actionable": true,
+      "original_message": "cannot import name 'ChatOpenAI' from 'langchain.chat_models' (/Users/srepho/Downloads/ClaudeDev/fwork_learnability/venvs/langgraph/lib/python3.12/site-packages/langchain/chat_models/__init__.py)",
+      "original_traceback": "Traceback (most recent call last):\n  File \"/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_langgraph_ioaseysb/_runner.py\", line 17, in main\n    import solution\n  File \"/private/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_langgraph_ioaseysb/solution.py\", line 6, in <module>\n    from langchain.chat_models import ChatOpenAI\nImportError: cannot import name 'ChatOpenAI' from 'langchain.chat_models' (/Users/srepho/Downloads/ClaudeDev/fwork_learnability/venvs/langgraph/lib/python3.12/site-packages/langchain/chat_models/__init__.py)\n"
+    },
+    {
+      "category": "ErrorCategory.TYPE",
+      "origin": "ErrorOrigin.USER_CODE",
+      "exception_type": "AssertionError",
+      "signature": "AssertionError:Expected 'simple', got 'complex' for dev_001",
+      "is_actionable": true,
+      "original_message": "Expected 'simple', got 'complex' for dev_001",
+      "original_traceback": "Traceback (most recent call last):\n  File \"/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_langgraph_ioaseysb/_runner.py\", line 20, in main\n    exec('from solution import *\\n\\n# Test: dev_001\\nresult = classify_claim({\\'claim_id\\': \\'CLM-001\\', \\'description\\': \\'Minor fender bender in parking lot. My car was hit while parked. Other driver admitted fault.\\', \\'damage_estimate\\': 1200, \\'parties_involved\\': 2, \\'has_injury\\': False, \\'liability_clear\\': True, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'simple\\', f\"Expected \\'simple\\', got \\'{result[\\'classification\\']}\\' for dev_001\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_002\\nresult = classify_claim({\\'claim_id\\': \\'CLM-002\\', \\'description\\': \\'Multi-vehicle pileup on highway. Three cars involved, one driver taken to hospital with neck pain.\\', \\'damage_estimate\\': 25000, \\'parties_involved\\': 3, \\'has_injury\\': True, \\'liability_clear\\': False, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'complex\\', f\"Expected \\'complex\\', got \\'{result[\\'classification\\']}\\' for dev_002\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_003\\nresult = classify_claim({\\'claim_id\\': \\'CLM-003\\', \\'description\\': \\'Delivery truck backed into storefront causing significant structural damage.\\', \\'damage_estimate\\': 45000, \\'parties_involved\\': 2, \\'has_injury\\': False, \\'liability_clear\\': True, \\'vehicle_type\\': \\'commercial\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'complex\\', f\"Expected \\'complex\\', got \\'{result[\\'classification\\']}\\' for dev_003\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_004\\nresult = classify_claim({\\'claim_id\\': \\'CLM-004\\', \\'description\\': \\'Shopping cart rolled into my car door in supermarket parking lot.\\', \\'damage_estimate\\': 450, \\'parties_involved\\': 1, \\'has_injury\\': False, \\'liability_clear\\': True, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'simple\\', f\"Expected \\'simple\\', got \\'{result[\\'classification\\']}\\' for dev_004\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_005\\nresult = classify_claim({\\'claim_id\\': \\'CLM-005\\', \\'description\\': \\'Two cars collided at intersection. Both drivers claim the other ran the red light. Dashcam footage is unclear.\\', \\'damage_estimate\\': 8000, \\'parties_involved\\': 2, \\'has_injury\\': False, \\'liability_clear\\': False, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'complex\\', f\"Expected \\'complex\\', got \\'{result[\\'classification\\']}\\' for dev_005\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\nprint(\\'All development tests passed!\\')')\n  File \"<string>\", line 9, in <module>\nAssertionError: Expected 'simple', got 'complex' for dev_001\n"
+    },
+    {
+      "category": "ErrorCategory.SYNTAX",
+      "origin": "ErrorOrigin.USER_CODE",
+      "exception_type": "SyntaxError",
+      "signature": "SyntaxError:Line 196: expected an indented block after 'elif' statement on line N",
+      "is_actionable": true,
+      "original_message": "Line 196: expected an indented block after 'elif' statement on line 191",
+      "original_traceback": ""
+    }
+  ],
+  "hallucination_result": {
+    "total_api_calls": 1,
+    "valid_calls": 0,
+    "invented_calls": 1,
+    "version_conflict_calls": 0,
+    "hallucinated_symbols": [
+      "StateGraph"
+    ]
+  },
+  "static_compliance": {
+    "passed": true,
+    "has_import": true,
+    "has_framework_symbols": true,
+    "imported_modules": [
+      "typing",
+      "typing.TypedDict",
+      "typing.Literal",
+      "typing.Annotated",
+      "operator",
+      "langgraph.graph",
+      "langgraph.graph.StateGraph",
+      "langgraph.graph.END",
+      "langgraph.graph.message",
+      "langgraph.graph.message.add_messages",
+      "langchain_core.messages",
+      "langchain_core.messages.HumanMessage",
+      "langchain_core.messages.SystemMessage",
+      "os",
+      "langchain_openai",
+      "langchain_openai.ChatOpenAI",
+      "langchain.chat_models",
+      "langchain.chat_models.ChatOpenAI"
+    ],
+    "used_symbols": [
+      "add_messages",
+      "END",
+      "StateGraph"
+    ],
+    "missing_requirements": []
+  },
+  "python_version": "",
+  "dependency_versions": {}
+}

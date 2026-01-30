@@ -1,0 +1,228 @@
+{
+  "trial_id": "71c5d54a",
+  "experiment_id": "exp_20260129_234834",
+  "timestamp": "2026-01-30T01:23:21.606529",
+  "framework": "langgraph",
+  "framework_version": "latest",
+  "doc_level": "none",
+  "doc_hash": "",
+  "doc_token_count": 0,
+  "task_tier": 1,
+  "task_id": "tier1_claims_classification",
+  "model": "deepseek-v3",
+  "run_number": 1,
+  "result": {
+    "trial_id": "71c5d54a",
+    "framework": "langgraph",
+    "doc_level": "none",
+    "task_tier": 1,
+    "model": "DeepSeek (deepseek-chat)",
+    "outcome": "success",
+    "final_turn": 8,
+    "dev_set_pass": true,
+    "hidden_set_pass": false,
+    "hidden_set_score": 0.0,
+    "compliance_check_pass": true,
+    "total_tokens": 50887,
+    "turns": [
+      {
+        "turn_number": 1,
+        "outcome": "error",
+        "code_hash": "159f20443ece5d15",
+        "code_loc": 282,
+        "error_type": "ModuleNotFoundError",
+        "error_message": "No module named 'langgraph.checkpoint.aiosqlite'",
+        "tokens_generated": 2238,
+        "execution_time_ms": 3877.8910636901855
+      },
+      {
+        "turn_number": 2,
+        "outcome": "error",
+        "code_hash": "abfe3c193f6dfec9",
+        "code_loc": 295,
+        "error_type": "ModuleNotFoundError",
+        "error_message": "No module named 'langchain_openai'",
+        "tokens_generated": 2635,
+        "execution_time_ms": 707.6699733734131
+      },
+      {
+        "turn_number": 3,
+        "outcome": "error",
+        "code_hash": "a6100d39ca2e5f7d",
+        "code_loc": 312,
+        "error_type": "AssertionError",
+        "error_message": "Expected 'simple', got 'complex' for dev_001",
+        "tokens_generated": 2915,
+        "execution_time_ms": 709.0308666229248
+      },
+      {
+        "turn_number": 4,
+        "outcome": "error",
+        "code_hash": "c55a3f6bc2c62bc5",
+        "code_loc": 264,
+        "error_type": "ModuleNotFoundError",
+        "error_message": "No module named 'langchain_openai'",
+        "tokens_generated": 4096,
+        "execution_time_ms": 684.7879886627197
+      },
+      {
+        "turn_number": 5,
+        "outcome": "error",
+        "code_hash": "8a755481218041e1",
+        "code_loc": 291,
+        "error_type": "AssertionError",
+        "error_message": "Expected 'simple', got 'complex' for dev_001",
+        "tokens_generated": 2838,
+        "execution_time_ms": 695.8537101745605
+      },
+      {
+        "turn_number": 6,
+        "outcome": "error",
+        "code_hash": "540c49da2c0a1af2",
+        "code_loc": 405,
+        "error_type": "ModuleNotFoundError",
+        "error_message": "No module named 'langchain_openai'",
+        "tokens_generated": 3830,
+        "execution_time_ms": 701.7159461975098
+      },
+      {
+        "turn_number": 7,
+        "outcome": "error",
+        "code_hash": "7e1b22b0b8e94d14",
+        "code_loc": 305,
+        "error_type": "AssertionError",
+        "error_message": "Expected 'simple', got 'complex' for dev_001",
+        "tokens_generated": 2755,
+        "execution_time_ms": 755.7799816131592
+      },
+      {
+        "turn_number": 8,
+        "outcome": "success",
+        "code_hash": "b13f5e157915a963",
+        "code_loc": 316,
+        "error_type": null,
+        "error_message": null,
+        "tokens_generated": 3100,
+        "execution_time_ms": 668.7617301940918
+      }
+    ]
+  },
+  "metrics": {
+    "turns_to_success": 8,
+    "success": true,
+    "first_attempt_success": false,
+    "total_tokens": 50887,
+    "error_types": {
+      "ModuleNotFoundError": 4,
+      "AssertionError": 3
+    },
+    "meaningful_error_rate": 0.0,
+    "self_correction_ratio": 1.0,
+    "hallucination_rate": 0.0,
+    "invented_rate": 0.0,
+    "version_conflict_rate": 0.0,
+    "compliance_pass": true,
+    "framework_bypass": false,
+    "hidden_set_pass": false,
+    "hidden_set_score": 0.0
+  },
+  "error_analyses": [
+    {
+      "category": "ErrorCategory.IMPORT",
+      "origin": "ErrorOrigin.USER_CODE",
+      "exception_type": "ModuleNotFoundError",
+      "signature": "ModuleNotFoundError:No module named '...'",
+      "is_actionable": true,
+      "original_message": "No module named 'langgraph.checkpoint.aiosqlite'",
+      "original_traceback": "Traceback (most recent call last):\n  File \"/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_langgraph_ny0fjv9o/_runner.py\", line 17, in main\n    import solution\n  File \"/private/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_langgraph_ny0fjv9o/solution.py\", line 8, in <module>\n    from langgraph.checkpoint.aiosqlite import AsyncSqliteSaver\nModuleNotFoundError: No module named 'langgraph.checkpoint.aiosqlite'\n"
+    },
+    {
+      "category": "ErrorCategory.IMPORT",
+      "origin": "ErrorOrigin.USER_CODE",
+      "exception_type": "ModuleNotFoundError",
+      "signature": "ModuleNotFoundError:No module named 'langchain_openai'",
+      "is_actionable": true,
+      "original_message": "No module named 'langchain_openai'",
+      "original_traceback": "Traceback (most recent call last):\n  File \"/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_langgraph_ny0fjv9o/_runner.py\", line 17, in main\n    import solution\n  File \"/private/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_langgraph_ny0fjv9o/solution.py\", line 12, in <module>\n    from langchain_openai import ChatOpenAI\nModuleNotFoundError: No module named 'langchain_openai'\n"
+    },
+    {
+      "category": "ErrorCategory.TYPE",
+      "origin": "ErrorOrigin.USER_CODE",
+      "exception_type": "AssertionError",
+      "signature": "AssertionError:Expected 'simple', got 'complex' for dev_001",
+      "is_actionable": true,
+      "original_message": "Expected 'simple', got 'complex' for dev_001",
+      "original_traceback": "Traceback (most recent call last):\n  File \"/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_langgraph_ny0fjv9o/_runner.py\", line 20, in main\n    exec('from solution import *\\n\\n# Test: dev_001\\nresult = classify_claim({\\'claim_id\\': \\'CLM-001\\', \\'description\\': \\'Minor fender bender in parking lot. My car was hit while parked. Other driver admitted fault.\\', \\'damage_estimate\\': 1200, \\'parties_involved\\': 2, \\'has_injury\\': False, \\'liability_clear\\': True, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'simple\\', f\"Expected \\'simple\\', got \\'{result[\\'classification\\']}\\' for dev_001\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_002\\nresult = classify_claim({\\'claim_id\\': \\'CLM-002\\', \\'description\\': \\'Multi-vehicle pileup on highway. Three cars involved, one driver taken to hospital with neck pain.\\', \\'damage_estimate\\': 25000, \\'parties_involved\\': 3, \\'has_injury\\': True, \\'liability_clear\\': False, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'complex\\', f\"Expected \\'complex\\', got \\'{result[\\'classification\\']}\\' for dev_002\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_003\\nresult = classify_claim({\\'claim_id\\': \\'CLM-003\\', \\'description\\': \\'Delivery truck backed into storefront causing significant structural damage.\\', \\'damage_estimate\\': 45000, \\'parties_involved\\': 2, \\'has_injury\\': False, \\'liability_clear\\': True, \\'vehicle_type\\': \\'commercial\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'complex\\', f\"Expected \\'complex\\', got \\'{result[\\'classification\\']}\\' for dev_003\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_004\\nresult = classify_claim({\\'claim_id\\': \\'CLM-004\\', \\'description\\': \\'Shopping cart rolled into my car door in supermarket parking lot.\\', \\'damage_estimate\\': 450, \\'parties_involved\\': 1, \\'has_injury\\': False, \\'liability_clear\\': True, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'simple\\', f\"Expected \\'simple\\', got \\'{result[\\'classification\\']}\\' for dev_004\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_005\\nresult = classify_claim({\\'claim_id\\': \\'CLM-005\\', \\'description\\': \\'Two cars collided at intersection. Both drivers claim the other ran the red light. Dashcam footage is unclear.\\', \\'damage_estimate\\': 8000, \\'parties_involved\\': 2, \\'has_injury\\': False, \\'liability_clear\\': False, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'complex\\', f\"Expected \\'complex\\', got \\'{result[\\'classification\\']}\\' for dev_005\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\nprint(\\'All development tests passed!\\')')\n  File \"<string>\", line 9, in <module>\nAssertionError: Expected 'simple', got 'complex' for dev_001\n"
+    },
+    {
+      "category": "ErrorCategory.IMPORT",
+      "origin": "ErrorOrigin.USER_CODE",
+      "exception_type": "ModuleNotFoundError",
+      "signature": "ModuleNotFoundError:No module named 'langchain_openai'",
+      "is_actionable": true,
+      "original_message": "No module named 'langchain_openai'",
+      "original_traceback": "Traceback (most recent call last):\n  File \"/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_langgraph_ny0fjv9o/_runner.py\", line 17, in main\n    import solution\n  File \"/private/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_langgraph_ny0fjv9o/solution.py\", line 8, in <module>\n    from langchain_openai import ChatOpenAI\nModuleNotFoundError: No module named 'langchain_openai'\n"
+    },
+    {
+      "category": "ErrorCategory.TYPE",
+      "origin": "ErrorOrigin.USER_CODE",
+      "exception_type": "AssertionError",
+      "signature": "AssertionError:Expected 'simple', got 'complex' for dev_001",
+      "is_actionable": true,
+      "original_message": "Expected 'simple', got 'complex' for dev_001",
+      "original_traceback": "Traceback (most recent call last):\n  File \"/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_langgraph_ny0fjv9o/_runner.py\", line 20, in main\n    exec('from solution import *\\n\\n# Test: dev_001\\nresult = classify_claim({\\'claim_id\\': \\'CLM-001\\', \\'description\\': \\'Minor fender bender in parking lot. My car was hit while parked. Other driver admitted fault.\\', \\'damage_estimate\\': 1200, \\'parties_involved\\': 2, \\'has_injury\\': False, \\'liability_clear\\': True, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'simple\\', f\"Expected \\'simple\\', got \\'{result[\\'classification\\']}\\' for dev_001\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_002\\nresult = classify_claim({\\'claim_id\\': \\'CLM-002\\', \\'description\\': \\'Multi-vehicle pileup on highway. Three cars involved, one driver taken to hospital with neck pain.\\', \\'damage_estimate\\': 25000, \\'parties_involved\\': 3, \\'has_injury\\': True, \\'liability_clear\\': False, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'complex\\', f\"Expected \\'complex\\', got \\'{result[\\'classification\\']}\\' for dev_002\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_003\\nresult = classify_claim({\\'claim_id\\': \\'CLM-003\\', \\'description\\': \\'Delivery truck backed into storefront causing significant structural damage.\\', \\'damage_estimate\\': 45000, \\'parties_involved\\': 2, \\'has_injury\\': False, \\'liability_clear\\': True, \\'vehicle_type\\': \\'commercial\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'complex\\', f\"Expected \\'complex\\', got \\'{result[\\'classification\\']}\\' for dev_003\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_004\\nresult = classify_claim({\\'claim_id\\': \\'CLM-004\\', \\'description\\': \\'Shopping cart rolled into my car door in supermarket parking lot.\\', \\'damage_estimate\\': 450, \\'parties_involved\\': 1, \\'has_injury\\': False, \\'liability_clear\\': True, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'simple\\', f\"Expected \\'simple\\', got \\'{result[\\'classification\\']}\\' for dev_004\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_005\\nresult = classify_claim({\\'claim_id\\': \\'CLM-005\\', \\'description\\': \\'Two cars collided at intersection. Both drivers claim the other ran the red light. Dashcam footage is unclear.\\', \\'damage_estimate\\': 8000, \\'parties_involved\\': 2, \\'has_injury\\': False, \\'liability_clear\\': False, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'complex\\', f\"Expected \\'complex\\', got \\'{result[\\'classification\\']}\\' for dev_005\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\nprint(\\'All development tests passed!\\')')\n  File \"<string>\", line 9, in <module>\nAssertionError: Expected 'simple', got 'complex' for dev_001\n"
+    },
+    {
+      "category": "ErrorCategory.IMPORT",
+      "origin": "ErrorOrigin.USER_CODE",
+      "exception_type": "ModuleNotFoundError",
+      "signature": "ModuleNotFoundError:No module named 'langchain_openai'",
+      "is_actionable": true,
+      "original_message": "No module named 'langchain_openai'",
+      "original_traceback": "Traceback (most recent call last):\n  File \"/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_langgraph_ny0fjv9o/_runner.py\", line 17, in main\n    import solution\n  File \"/private/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_langgraph_ny0fjv9o/solution.py\", line 8, in <module>\n    from langchain_openai import ChatOpenAI\nModuleNotFoundError: No module named 'langchain_openai'\n"
+    },
+    {
+      "category": "ErrorCategory.TYPE",
+      "origin": "ErrorOrigin.USER_CODE",
+      "exception_type": "AssertionError",
+      "signature": "AssertionError:Expected 'simple', got 'complex' for dev_001",
+      "is_actionable": true,
+      "original_message": "Expected 'simple', got 'complex' for dev_001",
+      "original_traceback": "Traceback (most recent call last):\n  File \"/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_langgraph_ny0fjv9o/_runner.py\", line 20, in main\n    exec('from solution import *\\n\\n# Test: dev_001\\nresult = classify_claim({\\'claim_id\\': \\'CLM-001\\', \\'description\\': \\'Minor fender bender in parking lot. My car was hit while parked. Other driver admitted fault.\\', \\'damage_estimate\\': 1200, \\'parties_involved\\': 2, \\'has_injury\\': False, \\'liability_clear\\': True, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'simple\\', f\"Expected \\'simple\\', got \\'{result[\\'classification\\']}\\' for dev_001\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_002\\nresult = classify_claim({\\'claim_id\\': \\'CLM-002\\', \\'description\\': \\'Multi-vehicle pileup on highway. Three cars involved, one driver taken to hospital with neck pain.\\', \\'damage_estimate\\': 25000, \\'parties_involved\\': 3, \\'has_injury\\': True, \\'liability_clear\\': False, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'complex\\', f\"Expected \\'complex\\', got \\'{result[\\'classification\\']}\\' for dev_002\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_003\\nresult = classify_claim({\\'claim_id\\': \\'CLM-003\\', \\'description\\': \\'Delivery truck backed into storefront causing significant structural damage.\\', \\'damage_estimate\\': 45000, \\'parties_involved\\': 2, \\'has_injury\\': False, \\'liability_clear\\': True, \\'vehicle_type\\': \\'commercial\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'complex\\', f\"Expected \\'complex\\', got \\'{result[\\'classification\\']}\\' for dev_003\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_004\\nresult = classify_claim({\\'claim_id\\': \\'CLM-004\\', \\'description\\': \\'Shopping cart rolled into my car door in supermarket parking lot.\\', \\'damage_estimate\\': 450, \\'parties_involved\\': 1, \\'has_injury\\': False, \\'liability_clear\\': True, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'simple\\', f\"Expected \\'simple\\', got \\'{result[\\'classification\\']}\\' for dev_004\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_005\\nresult = classify_claim({\\'claim_id\\': \\'CLM-005\\', \\'description\\': \\'Two cars collided at intersection. Both drivers claim the other ran the red light. Dashcam footage is unclear.\\', \\'damage_estimate\\': 8000, \\'parties_involved\\': 2, \\'has_injury\\': False, \\'liability_clear\\': False, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'complex\\', f\"Expected \\'complex\\', got \\'{result[\\'classification\\']}\\' for dev_005\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\nprint(\\'All development tests passed!\\')')\n  File \"<string>\", line 9, in <module>\nAssertionError: Expected 'simple', got 'complex' for dev_001\n"
+    }
+  ],
+  "hallucination_result": {
+    "total_api_calls": 1,
+    "valid_calls": 0,
+    "invented_calls": 1,
+    "version_conflict_calls": 0,
+    "hallucinated_symbols": [
+      "StateGraph"
+    ]
+  },
+  "static_compliance": {
+    "passed": true,
+    "has_import": true,
+    "has_framework_symbols": true,
+    "imported_modules": [
+      "typing",
+      "typing.TypedDict",
+      "typing.Annotated",
+      "typing.Literal",
+      "langgraph.graph",
+      "langgraph.graph.StateGraph",
+      "langgraph.graph.END",
+      "langgraph.graph.message",
+      "langgraph.graph.message.add_messages",
+      "json"
+    ],
+    "used_symbols": [
+      "add_messages",
+      "END",
+      "StateGraph"
+    ],
+    "missing_requirements": []
+  },
+  "python_version": "",
+  "dependency_versions": {}
+}

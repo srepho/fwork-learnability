@@ -1,0 +1,166 @@
+{
+  "trial_id": "1e0b11f0",
+  "experiment_id": "exp_20260129_234834",
+  "timestamp": "2026-01-30T00:31:06.440952",
+  "framework": "haystack",
+  "framework_version": "latest",
+  "doc_level": "moderate",
+  "doc_hash": "1044384f09edaabb",
+  "doc_token_count": 319,
+  "task_tier": 1,
+  "task_id": "tier1_claims_classification",
+  "model": "deepseek-v3",
+  "run_number": 2,
+  "result": {
+    "trial_id": "1e0b11f0",
+    "framework": "haystack",
+    "doc_level": "moderate",
+    "task_tier": 1,
+    "model": "DeepSeek (deepseek-chat)",
+    "outcome": "success",
+    "final_turn": 4,
+    "dev_set_pass": true,
+    "hidden_set_pass": false,
+    "hidden_set_score": 0.0,
+    "compliance_check_pass": true,
+    "total_tokens": 29819,
+    "turns": [
+      {
+        "turn_number": 1,
+        "outcome": "error",
+        "code_hash": "baea35ce05f5c697",
+        "code_loc": 319,
+        "error_type": "AttributeError",
+        "error_message": "'NoneType' object has no attribute 'resolve_value'",
+        "tokens_generated": 2496,
+        "execution_time_ms": 1307.492971420288
+      },
+      {
+        "turn_number": 2,
+        "outcome": "error",
+        "code_hash": "225315b9dbd88b67",
+        "code_loc": 333,
+        "error_type": "AssertionError",
+        "error_message": "Expected 'simple', got 'complex' for dev_001",
+        "tokens_generated": 2922,
+        "execution_time_ms": 2923.9501953125
+      },
+      {
+        "turn_number": 3,
+        "outcome": "error",
+        "code_hash": "febcca731c39ee69",
+        "code_loc": 381,
+        "error_type": "PipelineConnectError",
+        "error_message": "Cannot connect 'llm.replies' with 'validator.messages': their declared input and output types do not match.\n'llm':\n - replies: list[str]\n'validator':\n - messages: list[ChatMessage] (available)",
+        "tokens_generated": 3498,
+        "execution_time_ms": 1333.1668376922607
+      },
+      {
+        "turn_number": 4,
+        "outcome": "success",
+        "code_hash": "5ec45e667683c558",
+        "code_loc": 399,
+        "error_type": null,
+        "error_message": null,
+        "tokens_generated": 3574,
+        "execution_time_ms": 3332.0932388305664
+      }
+    ]
+  },
+  "metrics": {
+    "turns_to_success": 4,
+    "success": true,
+    "first_attempt_success": false,
+    "total_tokens": 29819,
+    "error_types": {
+      "AttributeError": 1,
+      "AssertionError": 1,
+      "PipelineConnectError": 1
+    },
+    "meaningful_error_rate": 0.0,
+    "self_correction_ratio": 1.0,
+    "hallucination_rate": 0.0,
+    "invented_rate": 0.0,
+    "version_conflict_rate": 0.0,
+    "compliance_pass": true,
+    "framework_bypass": false,
+    "hidden_set_pass": false,
+    "hidden_set_score": 0.0
+  },
+  "error_analyses": [
+    {
+      "category": "ErrorCategory.HALLUCINATION",
+      "origin": "ErrorOrigin.FRAMEWORK_CONTEXT",
+      "exception_type": "AttributeError",
+      "signature": "AttributeError:'NoneType'...'resolve_value'",
+      "is_actionable": true,
+      "original_message": "'NoneType' object has no attribute 'resolve_value'",
+      "original_traceback": "Traceback (most recent call last):\n  File \"/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_haystack_0dgx4me6/_runner.py\", line 20, in main\n    exec('from solution import *\\n\\n# Test: dev_001\\nresult = classify_claim({\\'claim_id\\': \\'CLM-001\\', \\'description\\': \\'Minor fender bender in parking lot. My car was hit while parked. Other driver admitted fault.\\', \\'damage_estimate\\': 1200, \\'parties_involved\\': 2, \\'has_injury\\': False, \\'liability_clear\\': True, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'simple\\', f\"Expected \\'simple\\', got \\'{result[\\'classification\\']}\\' for dev_001\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_002\\nresult = classify_claim({\\'claim_id\\': \\'CLM-002\\', \\'description\\': \\'Multi-vehicle pileup on highway. Three cars involved, one driver taken to hospital with neck pain.\\', \\'damage_estimate\\': 25000, \\'parties_involved\\': 3, \\'has_injury\\': True, \\'liability_clear\\': False, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'complex\\', f\"Expected \\'complex\\', got \\'{result[\\'classification\\']}\\' for dev_002\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_003\\nresult = classify_claim({\\'claim_id\\': \\'CLM-003\\', \\'description\\': \\'Delivery truck backed into storefront causing significant structural damage.\\', \\'damage_estimate\\': 45000, \\'parties_involved\\': 2, \\'has_injury\\': False, \\'liability_clear\\': True, \\'vehicle_type\\': \\'commercial\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'complex\\', f\"Expected \\'complex\\', got \\'{result[\\'classification\\']}\\' for dev_003\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_004\\nresult = classify_claim({\\'claim_id\\': \\'CLM-004\\', \\'description\\': \\'Shopping cart rolled into my car door in supermarket parking lot.\\', \\'damage_estimate\\': 450, \\'parties_involved\\': 1, \\'has_injury\\': False, \\'liability_clear\\': True, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'simple\\', f\"Expected \\'simple\\', got \\'{result[\\'classification\\']}\\' for dev_004\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_005\\nresult = classify_claim({\\'claim_id\\': \\'CLM-005\\', \\'description\\': \\'Two cars collided at intersection. Both drivers claim the other ran the red light. Dashcam footage is unclear.\\', \\'damage_estimate\\': 8000, \\'parties_involved\\': 2, \\'has_injury\\': False, \\'liability_clear\\': False, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'complex\\', f\"Expected \\'complex\\', got \\'{result[\\'classification\\']}\\' for dev_005\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\nprint(\\'All development tests passed!\\')')\n  File \"<string>\", line 4, in <module>\n  File \"/private/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_haystack_0dgx4me6/solution.py\", line 270, in classify_claim\n    classifier = get_classifier()\n                 ^^^^^^^^^^^^^^^^\n  File \"/private/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_haystack_0dgx4me6/solution.py\", line 255, in get_classifier\n    _classifier_instance = ClaimsClassifier(api_key=api_key, model=model)\n                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_haystack_0dgx4me6/solution.py\", line 78, in __init__\n    self.pipeline = self._build_pipeline()\n                    ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_haystack_0dgx4me6/solution.py\", line 88, in _build_pipeline\n    pipeline.add_component(\"llm\", OpenAIGenerator(api_key=self.api_key, model=self.model))\n                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/srepho/Downloads/ClaudeDev/fwork_learnability/venvs/haystack/lib/python3.12/site-packages/haystack/core/component/component.py\", line 288, in __call__\n    instance = super().__call__(*args, **kwargs)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/srepho/Downloads/ClaudeDev/fwork_learnability/venvs/haystack/lib/python3.12/site-packages/haystack/components/generators/openai.py\", line 137, in __init__\n    api_key=api_key.resolve_value(),\n            ^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'NoneType' object has no attribute 'resolve_value'\n"
+    },
+    {
+      "category": "ErrorCategory.TYPE",
+      "origin": "ErrorOrigin.USER_CODE",
+      "exception_type": "AssertionError",
+      "signature": "AssertionError:Expected 'simple', got 'complex' for dev_001",
+      "is_actionable": true,
+      "original_message": "Expected 'simple', got 'complex' for dev_001",
+      "original_traceback": "Traceback (most recent call last):\n  File \"/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_haystack_0dgx4me6/_runner.py\", line 20, in main\n    exec('from solution import *\\n\\n# Test: dev_001\\nresult = classify_claim({\\'claim_id\\': \\'CLM-001\\', \\'description\\': \\'Minor fender bender in parking lot. My car was hit while parked. Other driver admitted fault.\\', \\'damage_estimate\\': 1200, \\'parties_involved\\': 2, \\'has_injury\\': False, \\'liability_clear\\': True, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'simple\\', f\"Expected \\'simple\\', got \\'{result[\\'classification\\']}\\' for dev_001\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_002\\nresult = classify_claim({\\'claim_id\\': \\'CLM-002\\', \\'description\\': \\'Multi-vehicle pileup on highway. Three cars involved, one driver taken to hospital with neck pain.\\', \\'damage_estimate\\': 25000, \\'parties_involved\\': 3, \\'has_injury\\': True, \\'liability_clear\\': False, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'complex\\', f\"Expected \\'complex\\', got \\'{result[\\'classification\\']}\\' for dev_002\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_003\\nresult = classify_claim({\\'claim_id\\': \\'CLM-003\\', \\'description\\': \\'Delivery truck backed into storefront causing significant structural damage.\\', \\'damage_estimate\\': 45000, \\'parties_involved\\': 2, \\'has_injury\\': False, \\'liability_clear\\': True, \\'vehicle_type\\': \\'commercial\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'complex\\', f\"Expected \\'complex\\', got \\'{result[\\'classification\\']}\\' for dev_003\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_004\\nresult = classify_claim({\\'claim_id\\': \\'CLM-004\\', \\'description\\': \\'Shopping cart rolled into my car door in supermarket parking lot.\\', \\'damage_estimate\\': 450, \\'parties_involved\\': 1, \\'has_injury\\': False, \\'liability_clear\\': True, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'simple\\', f\"Expected \\'simple\\', got \\'{result[\\'classification\\']}\\' for dev_004\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_005\\nresult = classify_claim({\\'claim_id\\': \\'CLM-005\\', \\'description\\': \\'Two cars collided at intersection. Both drivers claim the other ran the red light. Dashcam footage is unclear.\\', \\'damage_estimate\\': 8000, \\'parties_involved\\': 2, \\'has_injury\\': False, \\'liability_clear\\': False, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'complex\\', f\"Expected \\'complex\\', got \\'{result[\\'classification\\']}\\' for dev_005\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\nprint(\\'All development tests passed!\\')')\n  File \"<string>\", line 9, in <module>\nAssertionError: Expected 'simple', got 'complex' for dev_001\n"
+    },
+    {
+      "category": "ErrorCategory.TYPE",
+      "origin": "ErrorOrigin.FRAMEWORK_CONTEXT",
+      "exception_type": "PipelineConnectError",
+      "signature": "PipelineConnectError:Cannot connect 'llm.replies' with 'validator.messages': their declared input and output types do not...",
+      "is_actionable": false,
+      "original_message": "Cannot connect 'llm.replies' with 'validator.messages': their declared input and output types do not match.\n'llm':\n - replies: list[str]\n'validator':\n - messages: list[ChatMessage] (available)",
+      "original_traceback": "Traceback (most recent call last):\n  File \"/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_haystack_0dgx4me6/_runner.py\", line 20, in main\n    exec('from solution import *\\n\\n# Test: dev_001\\nresult = classify_claim({\\'claim_id\\': \\'CLM-001\\', \\'description\\': \\'Minor fender bender in parking lot. My car was hit while parked. Other driver admitted fault.\\', \\'damage_estimate\\': 1200, \\'parties_involved\\': 2, \\'has_injury\\': False, \\'liability_clear\\': True, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'simple\\', f\"Expected \\'simple\\', got \\'{result[\\'classification\\']}\\' for dev_001\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_002\\nresult = classify_claim({\\'claim_id\\': \\'CLM-002\\', \\'description\\': \\'Multi-vehicle pileup on highway. Three cars involved, one driver taken to hospital with neck pain.\\', \\'damage_estimate\\': 25000, \\'parties_involved\\': 3, \\'has_injury\\': True, \\'liability_clear\\': False, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'complex\\', f\"Expected \\'complex\\', got \\'{result[\\'classification\\']}\\' for dev_002\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_003\\nresult = classify_claim({\\'claim_id\\': \\'CLM-003\\', \\'description\\': \\'Delivery truck backed into storefront causing significant structural damage.\\', \\'damage_estimate\\': 45000, \\'parties_involved\\': 2, \\'has_injury\\': False, \\'liability_clear\\': True, \\'vehicle_type\\': \\'commercial\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'complex\\', f\"Expected \\'complex\\', got \\'{result[\\'classification\\']}\\' for dev_003\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_004\\nresult = classify_claim({\\'claim_id\\': \\'CLM-004\\', \\'description\\': \\'Shopping cart rolled into my car door in supermarket parking lot.\\', \\'damage_estimate\\': 450, \\'parties_involved\\': 1, \\'has_injury\\': False, \\'liability_clear\\': True, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'simple\\', f\"Expected \\'simple\\', got \\'{result[\\'classification\\']}\\' for dev_004\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_005\\nresult = classify_claim({\\'claim_id\\': \\'CLM-005\\', \\'description\\': \\'Two cars collided at intersection. Both drivers claim the other ran the red light. Dashcam footage is unclear.\\', \\'damage_estimate\\': 8000, \\'parties_involved\\': 2, \\'has_injury\\': False, \\'liability_clear\\': False, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'complex\\', f\"Expected \\'complex\\', got \\'{result[\\'classification\\']}\\' for dev_005\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\nprint(\\'All development tests passed!\\')')\n  File \"<string>\", line 4, in <module>\n  File \"/private/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_haystack_0dgx4me6/solution.py\", line 314, in classify_claim\n    classifier = get_classifier()\n                 ^^^^^^^^^^^^^^^^\n  File \"/private/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_haystack_0dgx4me6/solution.py\", line 299, in get_classifier\n    _classifier_instance = ClaimsClassifier(api_key=api_key, model=model)\n                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_haystack_0dgx4me6/solution.py\", line 80, in __init__\n    self.pipeline = self._build_pipeline()\n                    ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_haystack_0dgx4me6/solution.py\", line 105, in _build_pipeline\n    pipeline.connect(\"llm.replies\", \"validator.messages\")\n  File \"/Users/srepho/Downloads/ClaudeDev/fwork_learnability/venvs/haystack/lib/python3.12/site-packages/haystack/core/pipeline/base.py\", line 530, in connect\n    raise PipelineConnectError(msg)\nhaystack.core.errors.PipelineConnectError: Cannot connect 'llm.replies' with 'validator.messages': their declared input and output types do not match.\n'llm':\n - replies: list[str]\n'validator':\n - messages: list[ChatMessage] (available)\n"
+    }
+  ],
+  "hallucination_result": {
+    "total_api_calls": 5,
+    "valid_calls": 0,
+    "invented_calls": 5,
+    "version_conflict_calls": 0,
+    "hallucinated_symbols": [
+      "Pipeline",
+      "PromptBuilder",
+      "JsonSchemaValidator",
+      "OpenAIGenerator",
+      "ChatMessage.from_user"
+    ]
+  },
+  "static_compliance": {
+    "passed": true,
+    "has_import": true,
+    "has_framework_symbols": true,
+    "imported_modules": [
+      "logging",
+      "os",
+      "typing",
+      "typing.Dict",
+      "typing.Any",
+      "haystack",
+      "haystack.Pipeline",
+      "haystack.components.builders",
+      "haystack.components.builders.PromptBuilder",
+      "haystack.components.generators",
+      "haystack.components.generators.OpenAIGenerator",
+      "haystack.components.validators",
+      "haystack.components.validators.JsonSchemaValidator",
+      "haystack.dataclasses",
+      "haystack.dataclasses.ChatMessage",
+      "json"
+    ],
+    "used_symbols": [
+      "Pipeline",
+      "ChatMessage",
+      "PromptBuilder",
+      "JsonSchemaValidator",
+      "OpenAIGenerator",
+      "ChatMessage.from_user"
+    ],
+    "missing_requirements": []
+  },
+  "python_version": "",
+  "dependency_versions": {}
+}

@@ -1,0 +1,99 @@
+{
+  "trial_id": "0f9ef518",
+  "experiment_id": "exp_20260129_234834",
+  "timestamp": "2026-01-30T00:20:56.491762",
+  "framework": "haystack",
+  "framework_version": "latest",
+  "doc_level": "minimal",
+  "doc_hash": "372c54a96c3878d7",
+  "doc_token_count": 44,
+  "task_tier": 1,
+  "task_id": "tier1_claims_classification",
+  "model": "deepseek-v3",
+  "run_number": 2,
+  "result": {
+    "trial_id": "0f9ef518",
+    "framework": "haystack",
+    "doc_level": "minimal",
+    "task_tier": 1,
+    "model": "DeepSeek (deepseek-chat)",
+    "outcome": "success",
+    "final_turn": 1,
+    "dev_set_pass": true,
+    "hidden_set_pass": false,
+    "hidden_set_score": 0.0,
+    "compliance_check_pass": true,
+    "total_tokens": 2477,
+    "turns": [
+      {
+        "turn_number": 1,
+        "outcome": "success",
+        "code_hash": "fa6eabf44de8b10c",
+        "code_loc": 246,
+        "error_type": null,
+        "error_message": null,
+        "tokens_generated": 1986,
+        "execution_time_ms": 9568.56393814087
+      }
+    ]
+  },
+  "metrics": {
+    "turns_to_success": 1,
+    "success": true,
+    "first_attempt_success": true,
+    "total_tokens": 2477,
+    "error_types": {},
+    "meaningful_error_rate": 0.0,
+    "self_correction_ratio": 1.0,
+    "hallucination_rate": 0.0,
+    "invented_rate": 0.0,
+    "version_conflict_rate": 0.0,
+    "compliance_pass": true,
+    "framework_bypass": false,
+    "hidden_set_pass": false,
+    "hidden_set_score": 0.0
+  },
+  "error_analyses": [],
+  "hallucination_result": {
+    "total_api_calls": 4,
+    "valid_calls": 0,
+    "invented_calls": 4,
+    "version_conflict_calls": 0,
+    "hallucinated_symbols": [
+      "PromptBuilder",
+      "Pipeline",
+      "OpenAIGenerator",
+      "Secret.from_token"
+    ]
+  },
+  "static_compliance": {
+    "passed": true,
+    "has_import": true,
+    "has_framework_symbols": true,
+    "imported_modules": [
+      "logging",
+      "typing",
+      "typing.Dict",
+      "typing.Any",
+      "haystack",
+      "haystack.Pipeline",
+      "haystack.components.builders",
+      "haystack.components.builders.PromptBuilder",
+      "haystack.components.generators",
+      "haystack.components.generators.OpenAIGenerator",
+      "haystack.utils",
+      "haystack.utils.Secret",
+      "os"
+    ],
+    "used_symbols": [
+      "Secret",
+      "Pipeline",
+      "Secret.from_token",
+      "PromptBuilder",
+      "OpenAIGenerator"
+    ],
+    "missing_requirements": []
+  },
+  "python_version": "",
+  "dependency_versions": {}
+}

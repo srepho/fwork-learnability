@@ -1,0 +1,260 @@
+{
+  "trial_id": "e626f7b7",
+  "experiment_id": "exp_20260129_234834",
+  "timestamp": "2026-01-30T02:55:34.333761",
+  "framework": "langgraph",
+  "framework_version": "latest",
+  "doc_level": "full",
+  "doc_hash": "1c929d519093f98f",
+  "doc_token_count": 296,
+  "task_tier": 1,
+  "task_id": "tier1_claims_classification",
+  "model": "deepseek-v3",
+  "run_number": 2,
+  "result": {
+    "trial_id": "e626f7b7",
+    "framework": "langgraph",
+    "doc_level": "full",
+    "task_tier": 1,
+    "model": "DeepSeek (deepseek-chat)",
+    "outcome": "max_turns_reached",
+    "final_turn": 10,
+    "dev_set_pass": false,
+    "hidden_set_pass": false,
+    "hidden_set_score": 0.0,
+    "compliance_check_pass": true,
+    "total_tokens": 43903,
+    "turns": [
+      {
+        "turn_number": 1,
+        "outcome": "error",
+        "code_hash": "12bff75e2e0946c5",
+        "code_loc": 316,
+        "error_type": "ModuleNotFoundError",
+        "error_message": "No module named 'langgraph.checkpoint.aiosqlite'",
+        "tokens_generated": 2749,
+        "execution_time_ms": 708.975076675415
+      },
+      {
+        "turn_number": 2,
+        "outcome": "syntax_error",
+        "code_hash": "a5380537e2177188",
+        "code_loc": 92,
+        "error_type": "SyntaxError",
+        "error_message": "Line 92: unterminated string literal (detected at line 92)",
+        "tokens_generated": 2963,
+        "execution_time_ms": 0
+      },
+      {
+        "turn_number": 3,
+        "outcome": "syntax_error",
+        "code_hash": "ca094bea37eaa89d",
+        "code_loc": 90,
+        "error_type": "SyntaxError",
+        "error_message": "Line 90: unterminated string literal (detected at line 90)",
+        "tokens_generated": 2368,
+        "execution_time_ms": 0
+      },
+      {
+        "turn_number": 4,
+        "outcome": "syntax_error",
+        "code_hash": "ca094bea37eaa89d",
+        "code_loc": 90,
+        "error_type": "SyntaxError",
+        "error_message": "Line 90: unterminated string literal (detected at line 90)",
+        "tokens_generated": 2486,
+        "execution_time_ms": 0
+      },
+      {
+        "turn_number": 5,
+        "outcome": "syntax_error",
+        "code_hash": "ca094bea37eaa89d",
+        "code_loc": 90,
+        "error_type": "SyntaxError",
+        "error_message": "Line 90: unterminated string literal (detected at line 90)",
+        "tokens_generated": 2530,
+        "execution_time_ms": 0
+      },
+      {
+        "turn_number": 6,
+        "outcome": "syntax_error",
+        "code_hash": "ca094bea37eaa89d",
+        "code_loc": 90,
+        "error_type": "SyntaxError",
+        "error_message": "Line 90: unterminated string literal (detected at line 90)",
+        "tokens_generated": 2451,
+        "execution_time_ms": 0
+      },
+      {
+        "turn_number": 7,
+        "outcome": "syntax_error",
+        "code_hash": "ca094bea37eaa89d",
+        "code_loc": 90,
+        "error_type": "SyntaxError",
+        "error_message": "Line 90: unterminated string literal (detected at line 90)",
+        "tokens_generated": 2603,
+        "execution_time_ms": 0
+      },
+      {
+        "turn_number": 8,
+        "outcome": "syntax_error",
+        "code_hash": "ca094bea37eaa89d",
+        "code_loc": 90,
+        "error_type": "SyntaxError",
+        "error_message": "Line 90: unterminated string literal (detected at line 90)",
+        "tokens_generated": 2606,
+        "execution_time_ms": 0
+      },
+      {
+        "turn_number": 9,
+        "outcome": "syntax_error",
+        "code_hash": "ca094bea37eaa89d",
+        "code_loc": 90,
+        "error_type": "SyntaxError",
+        "error_message": "Line 90: unterminated string literal (detected at line 90)",
+        "tokens_generated": 2637,
+        "execution_time_ms": 0
+      },
+      {
+        "turn_number": 10,
+        "outcome": "syntax_error",
+        "code_hash": "ca094bea37eaa89d",
+        "code_loc": 90,
+        "error_type": "SyntaxError",
+        "error_message": "Line 90: unterminated string literal (detected at line 90)",
+        "tokens_generated": 2706,
+        "execution_time_ms": 0
+      }
+    ]
+  },
+  "metrics": {
+    "turns_to_success": null,
+    "success": false,
+    "first_attempt_success": false,
+    "total_tokens": 43903,
+    "error_types": {
+      "ModuleNotFoundError": 1,
+      "SyntaxError": 9
+    },
+    "meaningful_error_rate": 0.0,
+    "self_correction_ratio": 0.3,
+    "hallucination_rate": 0.0,
+    "invented_rate": 0.0,
+    "version_conflict_rate": 0.0,
+    "compliance_pass": true,
+    "framework_bypass": false,
+    "hidden_set_pass": false,
+    "hidden_set_score": 0.0
+  },
+  "error_analyses": [
+    {
+      "category": "ErrorCategory.IMPORT",
+      "origin": "ErrorOrigin.USER_CODE",
+      "exception_type": "ModuleNotFoundError",
+      "signature": "ModuleNotFoundError:No module named '...'",
+      "is_actionable": true,
+      "original_message": "No module named 'langgraph.checkpoint.aiosqlite'",
+      "original_traceback": "Traceback (most recent call last):\n  File \"/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_langgraph_609x_ao0/_runner.py\", line 17, in main\n    import solution\n  File \"/private/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_langgraph_609x_ao0/solution.py\", line 4, in <module>\n    from langgraph.checkpoint.aiosqlite import AsyncSqliteSaver\nModuleNotFoundError: No module named 'langgraph.checkpoint.aiosqlite'\n"
+    },
+    {
+      "category": "ErrorCategory.SYNTAX",
+      "origin": "ErrorOrigin.USER_CODE",
+      "exception_type": "SyntaxError",
+      "signature": "SyntaxError:Line 92: unterminated string literal (detected at line N)",
+      "is_actionable": true,
+      "original_message": "Line 92: unterminated string literal (detected at line 92)",
+      "original_traceback": ""
+    },
+    {
+      "category": "ErrorCategory.SYNTAX",
+      "origin": "ErrorOrigin.USER_CODE",
+      "exception_type": "SyntaxError",
+      "signature": "SyntaxError:Line 90: unterminated string literal (detected at line N)",
+      "is_actionable": true,
+      "original_message": "Line 90: unterminated string literal (detected at line 90)",
+      "original_traceback": ""
+    },
+    {
+      "category": "ErrorCategory.SYNTAX",
+      "origin": "ErrorOrigin.USER_CODE",
+      "exception_type": "SyntaxError",
+      "signature": "SyntaxError:Line 90: unterminated string literal (detected at line N)",
+      "is_actionable": true,
+      "original_message": "Line 90: unterminated string literal (detected at line 90)",
+      "original_traceback": ""
+    },
+    {
+      "category": "ErrorCategory.SYNTAX",
+      "origin": "ErrorOrigin.USER_CODE",
+      "exception_type": "SyntaxError",
+      "signature": "SyntaxError:Line 90: unterminated string literal (detected at line N)",
+      "is_actionable": true,
+      "original_message": "Line 90: unterminated string literal (detected at line 90)",
+      "original_traceback": ""
+    },
+    {
+      "category": "ErrorCategory.SYNTAX",
+      "origin": "ErrorOrigin.USER_CODE",
+      "exception_type": "SyntaxError",
+      "signature": "SyntaxError:Line 90: unterminated string literal (detected at line N)",
+      "is_actionable": true,
+      "original_message": "Line 90: unterminated string literal (detected at line 90)",
+      "original_traceback": ""
+    },
+    {
+      "category": "ErrorCategory.SYNTAX",
+      "origin": "ErrorOrigin.USER_CODE",
+      "exception_type": "SyntaxError",
+      "signature": "SyntaxError:Line 90: unterminated string literal (detected at line N)",
+      "is_actionable": true,
+      "original_message": "Line 90: unterminated string literal (detected at line 90)",
+      "original_traceback": ""
+    },
+    {
+      "category": "ErrorCategory.SYNTAX",
+      "origin": "ErrorOrigin.USER_CODE",
+      "exception_type": "SyntaxError",
+      "signature": "SyntaxError:Line 90: unterminated string literal (detected at line N)",
+      "is_actionable": true,
+      "original_message": "Line 90: unterminated string literal (detected at line 90)",
+      "original_traceback": ""
+    },
+    {
+      "category": "ErrorCategory.SYNTAX",
+      "origin": "ErrorOrigin.USER_CODE",
+      "exception_type": "SyntaxError",
+      "signature": "SyntaxError:Line 90: unterminated string literal (detected at line N)",
+      "is_actionable": true,
+      "original_message": "Line 90: unterminated string literal (detected at line 90)",
+      "original_traceback": ""
+    },
+    {
+      "category": "ErrorCategory.SYNTAX",
+      "origin": "ErrorOrigin.USER_CODE",
+      "exception_type": "SyntaxError",
+      "signature": "SyntaxError:Line 90: unterminated string literal (detected at line N)",
+      "is_actionable": true,
+      "original_message": "Line 90: unterminated string literal (detected at line 90)",
+      "original_traceback": ""
+    }
+  ],
+  "hallucination_result": {
+    "total_api_calls": 0,
+    "valid_calls": 0,
+    "invented_calls": 0,
+    "version_conflict_calls": 0,
+    "hallucinated_symbols": []
+  },
+  "static_compliance": {
+    "passed": false,
+    "has_import": false,
+    "has_framework_symbols": false,
+    "imported_modules": [],
+    "used_symbols": [],
+    "missing_requirements": [
+      "Code has syntax errors"
+    ]
+  },
+  "python_version": "",
+  "dependency_versions": {}
+}

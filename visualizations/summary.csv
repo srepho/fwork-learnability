@@ -1,0 +1,3 @@
+framework,Success Rate,Median Turns (Success),Avg Tokens,Hidden Set Score,First Attempt Success
+direct-api,0.833,2.0,17977.25,0.0,0.083
+pydantic-ai,0.917,3.0,23748.5,0.0,0.25

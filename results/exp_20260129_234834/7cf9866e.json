@@ -1,0 +1,123 @@
+{
+  "trial_id": "7cf9866e",
+  "experiment_id": "exp_20260129_234834",
+  "timestamp": "2026-01-29T23:48:35.095433",
+  "framework": "haystack",
+  "framework_version": "latest",
+  "doc_level": "none",
+  "doc_hash": "",
+  "doc_token_count": 0,
+  "task_tier": 1,
+  "task_id": "tier1_claims_classification",
+  "model": "deepseek-v3",
+  "run_number": 1,
+  "result": {
+    "trial_id": "7cf9866e",
+    "framework": "haystack",
+    "doc_level": "none",
+    "task_tier": 1,
+    "model": "DeepSeek (deepseek-chat)",
+    "outcome": "success",
+    "final_turn": 2,
+    "dev_set_pass": true,
+    "hidden_set_pass": false,
+    "hidden_set_score": 0.0,
+    "compliance_check_pass": true,
+    "total_tokens": 10801,
+    "turns": [
+      {
+        "turn_number": 1,
+        "outcome": "error",
+        "code_hash": "3f3508ef3e07c3d8",
+        "code_loc": 268,
+        "error_type": "AssertionError",
+        "error_message": "Expected 'simple', got 'complex' for dev_001",
+        "tokens_generated": 2271,
+        "execution_time_ms": 8930.41205406189
+      },
+      {
+        "turn_number": 2,
+        "outcome": "success",
+        "code_hash": "4053b910ac5e9eda",
+        "code_loc": 368,
+        "error_type": null,
+        "error_message": null,
+        "tokens_generated": 3714,
+        "execution_time_ms": 6355.058908462524
+      }
+    ]
+  },
+  "metrics": {
+    "turns_to_success": 2,
+    "success": true,
+    "first_attempt_success": false,
+    "total_tokens": 10801,
+    "error_types": {
+      "AssertionError": 1
+    },
+    "meaningful_error_rate": 0.0,
+    "self_correction_ratio": 1.0,
+    "hallucination_rate": 0.0,
+    "invented_rate": 0.0,
+    "version_conflict_rate": 0.0,
+    "compliance_pass": true,
+    "framework_bypass": false,
+    "hidden_set_pass": false,
+    "hidden_set_score": 0.0
+  },
+  "error_analyses": [
+    {
+      "category": "ErrorCategory.TYPE",
+      "origin": "ErrorOrigin.USER_CODE",
+      "exception_type": "AssertionError",
+      "signature": "AssertionError:Expected 'simple', got 'complex' for dev_001",
+      "is_actionable": true,
+      "original_message": "Expected 'simple', got 'complex' for dev_001",
+      "original_traceback": "Traceback (most recent call last):\n  File \"/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_haystack_3q001n46/_runner.py\", line 20, in main\n    exec('from solution import *\\n\\n# Test: dev_001\\nresult = classify_claim({\\'claim_id\\': \\'CLM-001\\', \\'description\\': \\'Minor fender bender in parking lot. My car was hit while parked. Other driver admitted fault.\\', \\'damage_estimate\\': 1200, \\'parties_involved\\': 2, \\'has_injury\\': False, \\'liability_clear\\': True, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'simple\\', f\"Expected \\'simple\\', got \\'{result[\\'classification\\']}\\' for dev_001\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_002\\nresult = classify_claim({\\'claim_id\\': \\'CLM-002\\', \\'description\\': \\'Multi-vehicle pileup on highway. Three cars involved, one driver taken to hospital with neck pain.\\', \\'damage_estimate\\': 25000, \\'parties_involved\\': 3, \\'has_injury\\': True, \\'liability_clear\\': False, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'complex\\', f\"Expected \\'complex\\', got \\'{result[\\'classification\\']}\\' for dev_002\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_003\\nresult = classify_claim({\\'claim_id\\': \\'CLM-003\\', \\'description\\': \\'Delivery truck backed into storefront causing significant structural damage.\\', \\'damage_estimate\\': 45000, \\'parties_involved\\': 2, \\'has_injury\\': False, \\'liability_clear\\': True, \\'vehicle_type\\': \\'commercial\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'complex\\', f\"Expected \\'complex\\', got \\'{result[\\'classification\\']}\\' for dev_003\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_004\\nresult = classify_claim({\\'claim_id\\': \\'CLM-004\\', \\'description\\': \\'Shopping cart rolled into my car door in supermarket parking lot.\\', \\'damage_estimate\\': 450, \\'parties_involved\\': 1, \\'has_injury\\': False, \\'liability_clear\\': True, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'simple\\', f\"Expected \\'simple\\', got \\'{result[\\'classification\\']}\\' for dev_004\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_005\\nresult = classify_claim({\\'claim_id\\': \\'CLM-005\\', \\'description\\': \\'Two cars collided at intersection. Both drivers claim the other ran the red light. Dashcam footage is unclear.\\', \\'damage_estimate\\': 8000, \\'parties_involved\\': 2, \\'has_injury\\': False, \\'liability_clear\\': False, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'complex\\', f\"Expected \\'complex\\', got \\'{result[\\'classification\\']}\\' for dev_005\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\nprint(\\'All development tests passed!\\')')\n  File \"<string>\", line 9, in <module>\nAssertionError: Expected 'simple', got 'complex' for dev_001\n"
+    }
+  ],
+  "hallucination_result": {
+    "total_api_calls": 4,
+    "valid_calls": 0,
+    "invented_calls": 4,
+    "version_conflict_calls": 0,
+    "hallucinated_symbols": [
+      "PromptBuilder",
+      "Pipeline",
+      "OpenAIGenerator",
+      "Secret.from_token"
+    ]
+  },
+  "static_compliance": {
+    "passed": true,
+    "has_import": true,
+    "has_framework_symbols": true,
+    "imported_modules": [
+      "logging",
+      "json",
+      "re",
+      "typing",
+      "typing.Dict",
+      "typing.Any",
+      "haystack",
+      "haystack.Pipeline",
+      "haystack.components.builders",
+      "haystack.components.builders.PromptBuilder",
+      "haystack.components.generators",
+      "haystack.components.generators.OpenAIGenerator",
+      "haystack.utils",
+      "haystack.utils.Secret",
+      "os"
+    ],
+    "used_symbols": [
+      "Secret",
+      "Pipeline",
+      "Secret.from_token",
+      "PromptBuilder",
+      "OpenAIGenerator"
+    ],
+    "missing_requirements": []
+  },
+  "python_version": "",
+  "dependency_versions": {}
+}

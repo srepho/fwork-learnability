@@ -1,0 +1,124 @@
+{
+  "pydantic-ai/latest/minimal": {
+    "framework": "pydantic-ai",
+    "version": "latest",
+    "level": "minimal",
+    "content_hash": "6a21f975fbb647ac",
+    "token_count": 52,
+    "snapshot_date": "2026-01-29T14:21:29.843308",
+    "source_urls": [
+      "generated"
+    ]
+  },
+  "pydantic-ai/latest/moderate": {
+    "framework": "pydantic-ai",
+    "version": "latest",
+    "level": "moderate",
+    "content_hash": "ac07fc3e5cc1c75d",
+    "token_count": 3614,
+    "snapshot_date": "2026-01-29T14:21:31.598486",
+    "source_urls": [
+      "https://ai.pydantic.dev/",
+      "https://ai.pydantic.dev/agents/"
+    ]
+  },
+  "pydantic-ai/latest/full": {
+    "framework": "pydantic-ai",
+    "version": "latest",
+    "level": "full",
+    "content_hash": "ac07fc3e5cc1c75d",
+    "token_count": 3614,
+    "snapshot_date": "2026-01-29T14:21:35.786985",
+    "source_urls": [
+      "https://ai.pydantic.dev/",
+      "https://ai.pydantic.dev/agents/",
+      "https://ai.pydantic.dev/tools/",
+      "https://ai.pydantic.dev/api/agent/"
+    ]
+  },
+  "direct-api/latest/minimal": {
+    "framework": "direct-api",
+    "version": "latest",
+    "level": "minimal",
+    "content_hash": "79cbf4fafe5dc0fb",
+    "token_count": 42,
+    "snapshot_date": "2026-01-29T14:21:35.788618",
+    "source_urls": [
+      "generated"
+    ]
+  },
+  "haystack/latest/minimal": {
+    "framework": "haystack",
+    "version": "latest",
+    "level": "minimal",
+    "content_hash": "372c54a96c3878d7",
+    "token_count": 44,
+    "snapshot_date": "2026-01-29T23:34:42.608015",
+    "source_urls": [
+      "generated"
+    ]
+  },
+  "haystack/latest/moderate": {
+    "framework": "haystack",
+    "version": "latest",
+    "level": "moderate",
+    "content_hash": "1044384f09edaabb",
+    "token_count": 319,
+    "snapshot_date": "2026-01-29T23:34:43.472559",
+    "source_urls": [
+      "https://docs.haystack.deepset.ai/docs/intro",
+      "https://docs.haystack.deepset.ai/docs/pipelines"
+    ]
+  },
+  "haystack/latest/full": {
+    "framework": "haystack",
+    "version": "latest",
+    "level": "full",
+    "content_hash": "1044384f09edaabb",
+    "token_count": 319,
+    "snapshot_date": "2026-01-29T23:34:44.482116",
+    "source_urls": [
+      "https://docs.haystack.deepset.ai/docs/intro",
+      "https://docs.haystack.deepset.ai/docs/pipelines",
+      "https://docs.haystack.deepset.ai/docs/agents",
+      "https://docs.haystack.deepset.ai/reference/"
+    ]
+  },
+  "langgraph/latest/minimal": {
+    "framework": "langgraph",
+    "version": "latest",
+    "level": "minimal",
+    "content_hash": "dc9ec822e6e2f88f",
+    "token_count": 48,
+    "snapshot_date": "2026-01-29T23:34:44.484555",
+    "source_urls": [
+      "generated"
+    ]
+  },
+  "langgraph/latest/moderate": {
+    "framework": "langgraph",
+    "version": "latest",
+    "level": "moderate",
+    "content_hash": "3aa7908ffaf87b8f",
+    "token_count": 18,
+    "snapshot_date": "2026-01-29T23:34:45.109940",
+    "source_urls": [
+      "https://langchain-ai.github.io/langgraph/",
+      "https://langchain-ai.github.io/langgraph/concepts/"
+    ]
+  },
+  "langgraph/latest/full": {
+    "framework": "langgraph",
+    "version": "latest",
+    "level": "full",
+    "content_hash": "1c929d519093f98f",
+    "token_count": 296,
+    "snapshot_date": "2026-01-29T23:34:45.735230",
+    "source_urls": [
+      "https://langchain-ai.github.io/langgraph/",
+      "https://langchain-ai.github.io/langgraph/concepts/",
+      "https://langchain-ai.github.io/langgraph/how-tos/",
+      "https://langchain-ai.github.io/langgraph/reference/"
+    ]
+  }
+}

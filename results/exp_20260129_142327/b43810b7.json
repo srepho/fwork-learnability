@@ -1,0 +1,88 @@
+{
+  "trial_id": "b43810b7",
+  "experiment_id": "exp_20260129_142327",
+  "timestamp": "2026-01-29T15:11:58.788253",
+  "framework": "pydantic-ai",
+  "framework_version": "latest",
+  "doc_level": "full",
+  "doc_hash": "ac07fc3e5cc1c75d",
+  "doc_token_count": 3614,
+  "task_tier": 1,
+  "task_id": "tier1_claims_classification",
+  "model": "deepseek-v3",
+  "run_number": 1,
+  "result": {
+    "trial_id": "b43810b7",
+    "framework": "pydantic-ai",
+    "doc_level": "full",
+    "task_tier": 1,
+    "model": "DeepSeek (deepseek-chat)",
+    "outcome": "success",
+    "final_turn": 1,
+    "dev_set_pass": true,
+    "hidden_set_pass": false,
+    "hidden_set_score": 0.0,
+    "compliance_check_pass": true,
+    "total_tokens": 8569,
+    "turns": [
+      {
+        "turn_number": 1,
+        "outcome": "success",
+        "code_hash": "071651ff8781189f",
+        "code_loc": 225,
+        "error_type": null,
+        "error_message": null,
+        "tokens_generated": 2302,
+        "execution_time_ms": 15537.537813186646
+      }
+    ]
+  },
+  "metrics": {
+    "turns_to_success": 1,
+    "success": true,
+    "first_attempt_success": true,
+    "total_tokens": 8569,
+    "error_types": {},
+    "meaningful_error_rate": 0.0,
+    "self_correction_ratio": 1.0,
+    "hallucination_rate": 0.0,
+    "invented_rate": 0.0,
+    "version_conflict_rate": 0.0,
+    "compliance_pass": true,
+    "framework_bypass": false,
+    "hidden_set_pass": false,
+    "hidden_set_score": 0.0
+  },
+  "error_analyses": [],
+  "hallucination_result": {
+    "total_api_calls": 1,
+    "valid_calls": 0,
+    "invented_calls": 1,
+    "version_conflict_calls": 0,
+    "hallucinated_symbols": [
+      "Agent"
+    ]
+  },
+  "static_compliance": {
+    "passed": true,
+    "has_import": true,
+    "has_framework_symbols": true,
+    "imported_modules": [
+      "typing",
+      "typing.Literal",
+      "pydantic",
+      "pydantic.BaseModel",
+      "pydantic.Field",
+      "pydantic_ai",
+      "pydantic_ai.Agent",
+      "pydantic_ai.RunContext"
+    ],
+    "used_symbols": [
+      "Agent",
+      "RunContext"
+    ],
+    "missing_requirements": []
+  },
+  "python_version": "",
+  "dependency_versions": {}
+}

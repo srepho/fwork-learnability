@@ -1,0 +1,172 @@
+# Framework configuration for learnability benchmark
+
+frameworks:
+  pydantic-ai:
+    package_name: pydantic_ai
+    display_name: PydanticAI
+    version: "1.0.0"
+    install_cmd: "pip install pydantic-ai"
+    release_date: "2025-09"
+    contamination_risk: low  # Post-dates DeepSeek V3 training
+    compliance:
+      required_imports:
+        - pydantic_ai
+      allowlist_symbols:
+        - Agent
+        - RunContext
+        - Tool
+        - ModelRetry
+      entrypoints:
+        - Agent.run
+        - Agent.run_sync
+
+  haystack:
+    package_name: haystack
+    display_name: Haystack
+    version: "2.0.0"
+    install_cmd: "pip install haystack-ai"
+    release_date: "2024-03"
+    contamination_risk: medium  # Earlier versions in training
+    compliance:
+      required_imports:
+        - haystack
+      allowlist_symbols:
+        - Pipeline
+        - Component
+        - Document
+      entrypoints:
+        - Pipeline.run
+
+  langgraph:
+    package_name: langgraph
+    display_name: LangGraph
+    version: "1.0.0"
+    install_cmd: "pip install langgraph"
+    release_date: "2025-10"
+    contamination_risk: high  # v0.x in training data
+    version_instructions: |
+      You are using LangGraph v1.0. Do not use methods from v0.2 or earlier.
+      Rely ONLY on the provided documentation.
+    compliance:
+      required_imports:
+        - langgraph
+      allowlist_symbols:
+        - StateGraph
+        - Graph
+        - END
+        - START
+      entrypoints:
+        - StateGraph.compile
+        - Graph.invoke
+
+  openai-agents:
+    package_name: openai_agents
+    display_name: OpenAI Agents SDK
+    version: "0.1.0"
+    install_cmd: "pip install openai-agents"
+    release_date: "2025-01"
+    contamination_risk: low
+    compliance:
+      required_imports:
+        - openai_agents
+        - agents
+      allowlist_symbols:
+        - Agent
+        - Runner
+        - function_tool
+      entrypoints:
+        - Runner.run
+        - Runner.run_sync
+
+  anthropic-agents:
+    package_name: anthropic_agents
+    display_name: Anthropic Agents SDK
+    version: "0.1.0"
+    install_cmd: "pip install anthropic-agents"
+    release_date: "2025-09"
+    contamination_risk: low
+    compliance:
+      required_imports:
+        - anthropic_agents
+      allowlist_symbols:
+        - Agent
+        - Tool
+      entrypoints: []
+
+  microsoft-agent-framework:
+    package_name: agent_framework
+    display_name: Microsoft Agent Framework
+    version: "0.1.0"
+    install_cmd: "pip install agent-framework"
+    release_date: "2025-01"
+    contamination_risk: low
+    notes: "github.com/microsoft/agent-framework"
+    compliance:
+      required_imports:
+        - agent_framework
+      allowlist_symbols: []
+      entrypoints: []
+
+  direct-api:
+    package_name: null
+    display_name: Direct API (Baseline)
+    version: null
+    install_cmd: "pip install httpx"
+    release_date: null
+    contamination_risk: null
+    notes: "Control condition - no framework"
+    compliance:
+      required_imports: []
+      allowlist_symbols: []
+      entrypoints: []
+
+# Model configuration
+models:
+  deepseek-v3:
+    display_name: DeepSeek V3
+    api_base: "https://api.deepseek.com/v1"
+    model_id: "deepseek-chat"
+    training_cutoff: "2024-12"
+    temperature: 0
+    max_tokens: 4096
+
+# Task configuration
+tasks:
+  tier1:
+    name: Claims Classification
+    description: Simple classification task testing basic framework setup
+    task_id: tier1_claims_classification
+    dev_test_count: 5
+    hidden_test_count: 12
+
+  tier2:
+    name: Claims Tool Use
+    description: Tool use task testing tool definition and schema handling
+    task_id: tier2_claims_tools
+    dev_test_count: 5
+    hidden_test_count: 10
+
+  tier3:
+    name: Claims Agent
+    description: Agent-native task with routing, state, and multi-step reasoning
+    task_id: tier3_claims_agent
+    dev_test_count: 5
+    hidden_test_count: 10
+
+# Documentation levels
+doc_levels:
+  none:
+    description: Framework name only
+    token_budget: 0
+
+  minimal:
+    description: One-paragraph description + install command
+    token_budget: 200
+
+  moderate:
+    description: Official quickstart + core concepts
+    token_budget: 2000
+
+  full:
+    description: Quickstart + tool use section + API reference
+    token_budget: 5000

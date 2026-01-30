@@ -1,0 +1,188 @@
+{
+  "trial_id": "bd595642",
+  "experiment_id": "exp_20260129_142327",
+  "timestamp": "2026-01-29T14:29:05.479306",
+  "framework": "pydantic-ai",
+  "framework_version": "latest",
+  "doc_level": "none",
+  "doc_hash": "",
+  "doc_token_count": 0,
+  "task_tier": 1,
+  "task_id": "tier1_claims_classification",
+  "model": "deepseek-v3",
+  "run_number": 2,
+  "result": {
+    "trial_id": "bd595642",
+    "framework": "pydantic-ai",
+    "doc_level": "none",
+    "task_tier": 1,
+    "model": "DeepSeek (deepseek-chat)",
+    "outcome": "success",
+    "final_turn": 6,
+    "dev_set_pass": true,
+    "hidden_set_pass": false,
+    "hidden_set_score": 0.0,
+    "compliance_check_pass": true,
+    "total_tokens": 32349,
+    "turns": [
+      {
+        "turn_number": 1,
+        "outcome": "error",
+        "code_hash": "694b9f8128caf8eb",
+        "code_loc": 212,
+        "error_type": "UserError",
+        "error_message": "Unknown keyword arguments: `result_type`",
+        "tokens_generated": 1855,
+        "execution_time_ms": 1463.0610942840576
+      },
+      {
+        "turn_number": 2,
+        "outcome": "error",
+        "code_hash": "f365db079a37e22a",
+        "code_loc": 233,
+        "error_type": "AssertionError",
+        "error_message": "Expected 'simple', got 'complex' for dev_001",
+        "tokens_generated": 2329,
+        "execution_time_ms": 5083.300828933716
+      },
+      {
+        "turn_number": 3,
+        "outcome": "error",
+        "code_hash": "bf12f544c32e6c9e",
+        "code_loc": 254,
+        "error_type": "UserError",
+        "error_message": "Unknown keyword arguments: `result_type`",
+        "tokens_generated": 2821,
+        "execution_time_ms": 1419.0058708190918
+      },
+      {
+        "turn_number": 4,
+        "outcome": "error",
+        "code_hash": "526aaf4e4851f09b",
+        "code_loc": 278,
+        "error_type": "TypeError",
+        "error_message": "'Agent' object is not callable",
+        "tokens_generated": 2834,
+        "execution_time_ms": 1419.2349910736084
+      },
+      {
+        "turn_number": 5,
+        "outcome": "error",
+        "code_hash": "56b70e5af22aa875",
+        "code_loc": 279,
+        "error_type": "UserError",
+        "error_message": "Unknown keyword arguments: `result_type`",
+        "tokens_generated": 2869,
+        "execution_time_ms": 1288.4180545806885
+      },
+      {
+        "turn_number": 6,
+        "outcome": "success",
+        "code_hash": "3f6b2d7fbd89fadd",
+        "code_loc": 278,
+        "error_type": null,
+        "error_message": null,
+        "tokens_generated": 2845,
+        "execution_time_ms": 1421.4420318603516
+      }
+    ]
+  },
+  "metrics": {
+    "turns_to_success": 6,
+    "success": true,
+    "first_attempt_success": false,
+    "total_tokens": 32349,
+    "error_types": {
+      "UserError": 3,
+      "AssertionError": 1,
+      "TypeError": 1
+    },
+    "meaningful_error_rate": 0.0,
+    "self_correction_ratio": 1.0,
+    "hallucination_rate": 0.0,
+    "invented_rate": 0.0,
+    "version_conflict_rate": 0.0,
+    "compliance_pass": true,
+    "framework_bypass": false,
+    "hidden_set_pass": false,
+    "hidden_set_score": 0.0
+  },
+  "error_analyses": [
+    {
+      "category": "ErrorCategory.TYPE",
+      "origin": "ErrorOrigin.FRAMEWORK_CONTEXT",
+      "exception_type": "UserError",
+      "signature": "UserError:Unknown keyword arguments: `result_type`",
+      "is_actionable": true,
+      "original_message": "Unknown keyword arguments: `result_type`",
+      "original_traceback": "Traceback (most recent call last):\n  File \"/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_pydantic-ai_xdt0n7_x/_runner.py\", line 17, in main\n    import solution\n  File \"/private/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_pydantic-ai_xdt0n7_x/solution.py\", line 19, in <module>\n    classifier_agent = Agent(\n                       ^^^^^^\n  File \"/Users/srepho/Downloads/ClaudeDev/fwork_learnability/venvs/pydantic-ai/lib/python3.12/site-packages/pydantic_ai/agent/__init__.py\", line 342, in __init__\n    _utils.validate_empty_kwargs(_deprecated_kwargs)\n  File \"/Users/srepho/Downloads/ClaudeDev/fwork_learnability/venvs/pydantic-ai/lib/python3.12/site-packages/pydantic_ai/_utils.py\", line 503, in validate_empty_kwargs\n    raise exceptions.UserError(f'Unknown keyword arguments: {unknown_kwargs}')\npydantic_ai.exceptions.UserError: Unknown keyword arguments: `result_type`\n"
+    },
+    {
+      "category": "ErrorCategory.TYPE",
+      "origin": "ErrorOrigin.USER_CODE",
+      "exception_type": "AssertionError",
+      "signature": "AssertionError:Expected 'simple', got 'complex' for dev_001",
+      "is_actionable": true,
+      "original_message": "Expected 'simple', got 'complex' for dev_001",
+      "original_traceback": "Traceback (most recent call last):\n  File \"/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_pydantic-ai_xdt0n7_x/_runner.py\", line 20, in main\n    exec('from solution import *\\n\\n# Test: dev_001\\nresult = classify_claim({\\'claim_id\\': \\'CLM-001\\', \\'description\\': \\'Minor fender bender in parking lot. My car was hit while parked. Other driver admitted fault.\\', \\'damage_estimate\\': 1200, \\'parties_involved\\': 2, \\'has_injury\\': False, \\'liability_clear\\': True, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'simple\\', f\"Expected \\'simple\\', got \\'{result[\\'classification\\']}\\' for dev_001\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_002\\nresult = classify_claim({\\'claim_id\\': \\'CLM-002\\', \\'description\\': \\'Multi-vehicle pileup on highway. Three cars involved, one driver taken to hospital with neck pain.\\', \\'damage_estimate\\': 25000, \\'parties_involved\\': 3, \\'has_injury\\': True, \\'liability_clear\\': False, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'complex\\', f\"Expected \\'complex\\', got \\'{result[\\'classification\\']}\\' for dev_002\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_003\\nresult = classify_claim({\\'claim_id\\': \\'CLM-003\\', \\'description\\': \\'Delivery truck backed into storefront causing significant structural damage.\\', \\'damage_estimate\\': 45000, \\'parties_involved\\': 2, \\'has_injury\\': False, \\'liability_clear\\': True, \\'vehicle_type\\': \\'commercial\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'complex\\', f\"Expected \\'complex\\', got \\'{result[\\'classification\\']}\\' for dev_003\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_004\\nresult = classify_claim({\\'claim_id\\': \\'CLM-004\\', \\'description\\': \\'Shopping cart rolled into my car door in supermarket parking lot.\\', \\'damage_estimate\\': 450, \\'parties_involved\\': 1, \\'has_injury\\': False, \\'liability_clear\\': True, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'simple\\', f\"Expected \\'simple\\', got \\'{result[\\'classification\\']}\\' for dev_004\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_005\\nresult = classify_claim({\\'claim_id\\': \\'CLM-005\\', \\'description\\': \\'Two cars collided at intersection. Both drivers claim the other ran the red light. Dashcam footage is unclear.\\', \\'damage_estimate\\': 8000, \\'parties_involved\\': 2, \\'has_injury\\': False, \\'liability_clear\\': False, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'complex\\', f\"Expected \\'complex\\', got \\'{result[\\'classification\\']}\\' for dev_005\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\nprint(\\'All development tests passed!\\')')\n  File \"<string>\", line 9, in <module>\nAssertionError: Expected 'simple', got 'complex' for dev_001\n"
+    },
+    {
+      "category": "ErrorCategory.TYPE",
+      "origin": "ErrorOrigin.FRAMEWORK_CONTEXT",
+      "exception_type": "UserError",
+      "signature": "UserError:Unknown keyword arguments: `result_type`",
+      "is_actionable": true,
+      "original_message": "Unknown keyword arguments: `result_type`",
+      "original_traceback": "Traceback (most recent call last):\n  File \"/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_pydantic-ai_xdt0n7_x/_runner.py\", line 17, in main\n    import solution\n  File \"/private/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_pydantic-ai_xdt0n7_x/solution.py\", line 19, in <module>\n    classifier_agent = Agent(\n                       ^^^^^^\n  File \"/Users/srepho/Downloads/ClaudeDev/fwork_learnability/venvs/pydantic-ai/lib/python3.12/site-packages/pydantic_ai/agent/__init__.py\", line 342, in __init__\n    _utils.validate_empty_kwargs(_deprecated_kwargs)\n  File \"/Users/srepho/Downloads/ClaudeDev/fwork_learnability/venvs/pydantic-ai/lib/python3.12/site-packages/pydantic_ai/_utils.py\", line 503, in validate_empty_kwargs\n    raise exceptions.UserError(f'Unknown keyword arguments: {unknown_kwargs}')\npydantic_ai.exceptions.UserError: Unknown keyword arguments: `result_type`\n"
+    },
+    {
+      "category": "ErrorCategory.TYPE",
+      "origin": "ErrorOrigin.USER_CODE",
+      "exception_type": "TypeError",
+      "signature": "TypeError:'Agent' object is not callable",
+      "is_actionable": true,
+      "original_message": "'Agent' object is not callable",
+      "original_traceback": "Traceback (most recent call last):\n  File \"/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_pydantic-ai_xdt0n7_x/_runner.py\", line 17, in main\n    import solution\n  File \"/private/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_pydantic-ai_xdt0n7_x/solution.py\", line 52, in <module>\n    @classifier_agent\n     ^^^^^^^^^^^^^^^^\nTypeError: 'Agent' object is not callable\n"
+    },
+    {
+      "category": "ErrorCategory.TYPE",
+      "origin": "ErrorOrigin.FRAMEWORK_CONTEXT",
+      "exception_type": "UserError",
+      "signature": "UserError:Unknown keyword arguments: `result_type`",
+      "is_actionable": true,
+      "original_message": "Unknown keyword arguments: `result_type`",
+      "original_traceback": "Traceback (most recent call last):\n  File \"/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_pydantic-ai_xdt0n7_x/_runner.py\", line 17, in main\n    import solution\n  File \"/private/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_pydantic-ai_xdt0n7_x/solution.py\", line 20, in <module>\n    classifier_agent = Agent(\n                       ^^^^^^\n  File \"/Users/srepho/Downloads/ClaudeDev/fwork_learnability/venvs/pydantic-ai/lib/python3.12/site-packages/pydantic_ai/agent/__init__.py\", line 342, in __init__\n    _utils.validate_empty_kwargs(_deprecated_kwargs)\n  File \"/Users/srepho/Downloads/ClaudeDev/fwork_learnability/venvs/pydantic-ai/lib/python3.12/site-packages/pydantic_ai/_utils.py\", line 503, in validate_empty_kwargs\n    raise exceptions.UserError(f'Unknown keyword arguments: {unknown_kwargs}')\npydantic_ai.exceptions.UserError: Unknown keyword arguments: `result_type`\n"
+    }
+  ],
+  "hallucination_result": {
+    "total_api_calls": 1,
+    "valid_calls": 0,
+    "invented_calls": 1,
+    "version_conflict_calls": 0,
+    "hallucinated_symbols": [
+      "Agent"
+    ]
+  },
+  "static_compliance": {
+    "passed": true,
+    "has_import": true,
+    "has_framework_symbols": true,
+    "imported_modules": [
+      "typing",
+      "typing.Literal",
+      "pydantic_ai",
+      "pydantic_ai.Agent",
+      "pydantic",
+      "pydantic.BaseModel",
+      "pydantic.Field",
+      "asyncio",
+      "json"
+    ],
+    "used_symbols": [
+      "Agent"
+    ],
+    "missing_requirements": []
+  },
+  "python_version": "",
+  "dependency_versions": {}
+}
