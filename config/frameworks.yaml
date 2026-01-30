@@ -126,7 +126,7 @@ models:
     display_name: DeepSeek V3
     api_base: "https://api.deepseek.com/v1"
     model_id: "deepseek-chat"
-    training_cutoff: "2024-12"
+    training_cutoff: "2024-07"
     temperature: 0
     max_tokens: 4096
 

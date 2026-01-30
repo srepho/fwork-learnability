@@ -84,6 +84,18 @@ def main():
         action="store_true",
         help="Print what would be run without executing",
     )
+    parser.add_argument(
+        "--contradiction-test",
+        action="store_true",
+        help="Run contradiction test with modified docs (renamed APIs)",
+    )
+    parser.add_argument(
+        "--contradiction-level",
+        type=str,
+        choices=["moderate", "full"],
+        default="moderate",
+        help="Doc level to use for contradiction test (default: moderate)",
+    )
 
     args = parser.parse_args()
 
@@ -121,12 +133,24 @@ def main():
         * config.runs_per_condition
     )
 
+    # Add contradiction test trials if requested
+    if args.contradiction_test:
+        contradiction_trials = (
+            len(config.frameworks)
+            * len(config.task_tiers)
+            * len(config.models)
+            * config.runs_per_condition
+        )
+        total += contradiction_trials
+
     console.print(f"\n[bold]LLM Framework Learnability Benchmark[/bold]")
     console.print(f"Experiment ID: {config.experiment_id}")
     console.print(f"Frameworks: {', '.join(config.frameworks)}")
     console.print(f"Doc levels: {', '.join(l.value for l in config.doc_levels)}")
     console.print(f"Task tiers: {config.task_tiers}")
     console.print(f"Runs per condition: {config.runs_per_condition}")
+    if args.contradiction_test:
+        console.print(f"[yellow]Contradiction test enabled at {args.contradiction_level} level[/yellow]")
     console.print(f"Total trials: {total}")
     console.print()
 
@@ -172,12 +196,51 @@ def main():
         try:
             logs = runner.run_experiment(config, progress_callback)
 
+            # Run contradiction tests if requested
+            if args.contradiction_test:
+                console.print("\n[yellow]Running contradiction tests...[/yellow]")
+                contradiction_level = DocumentLevel(args.contradiction_level)
+
+                for framework in config.frameworks:
+                    for tier in config.task_tiers:
+                        for model in config.models:
+                            for run in range(config.runs_per_condition):
+                                desc = f"{framework}/{args.contradiction_level}_contradiction/tier{tier}/{model}/run{run+1}"
+                                progress.update(task, description=f"[contradiction] {desc}")
+
+                                trial_log = runner.run_single_trial(
+                                    framework=framework,
+                                    doc_level=contradiction_level,
+                                    task_tier=tier,
+                                    model=model,
+                                    run_number=run + 1,
+                                    experiment_id=config.experiment_id,
+                                    max_turns=config.max_turns,
+                                    timeout_seconds=config.timeout_seconds,
+                                    use_contradiction_docs=True,
+                                )
+                                logs.append(trial_log)
+                                runner._save_trial_log(trial_log)
+
             console.print(f"\n[green]Experiment complete![/green]")
             console.print(f"Results saved to: {args.results_dir / config.experiment_id}")
 
             # Print summary
             successes = sum(1 for log in logs if log.result.get("outcome") == "success")
             console.print(f"Success rate: {successes}/{len(logs)} ({100*successes/len(logs):.1f}%)")
+
+            # Print contradiction test summary if run
+            if args.contradiction_test:
+                contradiction_logs = [log for log in logs if getattr(log, 'is_contradiction_test', False) or
+                                     (isinstance(log, dict) and log.get('is_contradiction_test'))]
+                if contradiction_logs:
+                    console.print(f"\n[yellow]Contradiction Test Results:[/yellow]")
+                    for log in contradiction_logs:
+                        analysis = log.contradiction_analysis if hasattr(log, 'contradiction_analysis') else log.get('contradiction_analysis')
+                        if analysis:
+                            framework = log.framework if hasattr(log, 'framework') else log.get('framework')
+                            console.print(f"  {framework}: {analysis.get('interpretation', 'unknown')} "
+                                        f"(adherence: {analysis.get('adherence_score', 0):.0%})")
 
         except KeyboardInterrupt:
             console.print("\n[yellow]Experiment interrupted[/yellow]")

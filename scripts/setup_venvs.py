@@ -14,7 +14,8 @@ FRAMEWORK_DEPS = {
     "pydantic-ai": ["pydantic-ai>=1.0.0", "pydantic>=2.0.0"],
     "haystack": ["haystack-ai>=2.0.0"],
     "langgraph": ["langgraph>=1.0.0", "langchain>=0.1.0"],
-    "openai-agents": ["openai>=1.0.0"],  # Placeholder - adjust when SDK available
+    "openai-agents": ["openai>=1.0.0"],
+    "anthropic-agents": ["anthropic>=0.39.0"],
     "direct-api": ["httpx>=0.27.0"],
 }
 

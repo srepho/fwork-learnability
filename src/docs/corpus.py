@@ -215,6 +215,29 @@ class DocumentCorpus:
                 versions.add(parts[1])
         return sorted(versions)
 
+    def get_contradiction_documentation(
+        self,
+        framework: str,
+        version: str,
+        level: DocumentLevel,
+    ) -> str:
+        """Get documentation with intentionally renamed APIs for contradiction testing.
+
+        This tests whether the model uses documentation or training data.
+        If the model uses the REAL API names despite being given docs with
+        MODIFIED names, it's proven to be using training data.
+
+        Args:
+            framework: Framework name.
+            version: Framework version.
+            level: Documentation level.
+
+        Returns:
+            Modified documentation with renamed APIs.
+        """
+        original = self.get_documentation(framework, version, level)
+        return create_contradiction_doc(framework, original)
+
     def _get_doc_path(
         self,
         framework: str,
@@ -246,6 +269,73 @@ def generate_minimal_doc(framework: str, description: str, install_cmd: str) -> 
 {install_cmd}
 ```
 """
+
+
+# API renaming rules for contradiction testing
+# If model uses REAL names despite being given docs with MODIFIED names,
+# it's using training data, not the documentation.
+CONTRADICTION_RULES = {
+    "haystack": {
+        "PromptBuilder": "TemplateBuilder",
+        "OpenAIGenerator": "OpenAITextGenerator",
+        "Pipeline": "Workflow",
+        "Secret.from_token": "Secret.create",
+        "Secret.from_env_var": "Secret.load_env",
+    },
+    "langgraph": {
+        "StateGraph": "StateMachine",
+        "add_node": "register_node",
+        "add_edge": "connect_nodes",
+        "compile": "build",
+        "START": "BEGIN",
+        "END": "FINISH",
+    },
+    "pydantic-ai": {
+        "Agent": "Assistant",
+        "run_sync": "execute",
+        "tool": "function",
+        "RunContext": "ExecutionContext",
+    },
+}
+
+
+def create_contradiction_doc(framework: str, original_content: str) -> str:
+    """Create documentation with intentionally renamed APIs.
+
+    This is used to test if the model is actually reading the docs
+    or just using training data. If the model uses the REAL API names
+    (not the modified ones), it's using training data.
+
+    Args:
+        framework: Framework name.
+        original_content: Original documentation content.
+
+    Returns:
+        Modified documentation with renamed APIs.
+    """
+    rules = CONTRADICTION_RULES.get(framework, {})
+    if not rules:
+        return original_content
+
+    modified = original_content
+
+    # Add a header explaining the "new" API names
+    header = f"""# {framework.title()} v3.0 Documentation
+
+**IMPORTANT: API Changes in v3.0**
+
+The following APIs have been renamed in v3.0:
+"""
+    for old_name, new_name in rules.items():
+        header += f"- `{old_name}` is now `{new_name}`\n"
+
+    header += "\nPlease use the NEW names shown in this documentation.\n\n---\n\n"
+
+    # Replace all occurrences
+    for old_name, new_name in rules.items():
+        modified = modified.replace(old_name, new_name)
+
+    return header + modified
 
 
 def generate_level_from_parts(

@@ -1,0 +1,122 @@
+{
+  "trial_id": "307366b8",
+  "experiment_id": "exp_20260130_043934",
+  "timestamp": "2026-01-30T05:03:07.632446",
+  "framework": "haystack",
+  "framework_version": "latest",
+  "doc_level": "full",
+  "doc_hash": "044631c8dc45e937",
+  "doc_token_count": 325,
+  "task_tier": 1,
+  "task_id": "tier1_claims_classification",
+  "model": "deepseek-v3",
+  "run_number": 1,
+  "is_contradiction_test": false,
+  "result": {
+    "trial_id": "307366b8",
+    "framework": "haystack",
+    "doc_level": "full",
+    "task_tier": 1,
+    "model": "DeepSeek (deepseek-chat)",
+    "outcome": "success",
+    "final_turn": 2,
+    "dev_set_pass": true,
+    "hidden_set_pass": false,
+    "hidden_set_score": 0.0,
+    "compliance_check_pass": true,
+    "total_tokens": 9779,
+    "turns": [
+      {
+        "turn_number": 1,
+        "outcome": "error",
+        "code_hash": "b170dad4c7b15aa0",
+        "code_loc": 204,
+        "error_type": "TemplateSyntaxError",
+        "error_message": "expected token ',', got 'for'",
+        "tokens_generated": 1861,
+        "execution_time_ms": 1428.236961364746
+      },
+      {
+        "turn_number": 2,
+        "outcome": "success",
+        "code_hash": "0ade9d6515d783e3",
+        "code_loc": 202,
+        "error_type": null,
+        "error_message": null,
+        "tokens_generated": 2018,
+        "execution_time_ms": 7749.297857284546
+      }
+    ]
+  },
+  "metrics": {
+    "turns_to_success": 2,
+    "success": true,
+    "first_attempt_success": false,
+    "total_tokens": 9779,
+    "error_types": {
+      "TemplateSyntaxError": 1
+    },
+    "meaningful_error_rate": 0.0,
+    "self_correction_ratio": 1.0,
+    "hallucination_rate": 0.0,
+    "invented_rate": 0.0,
+    "version_conflict_rate": 0.0,
+    "compliance_pass": true,
+    "framework_bypass": false,
+    "hidden_set_pass": false,
+    "hidden_set_score": 0.0
+  },
+  "error_analyses": [
+    {
+      "category": "ErrorCategory.SYNTAX",
+      "origin": "ErrorOrigin.FRAMEWORK_CONTEXT",
+      "exception_type": "TemplateSyntaxError",
+      "signature": "TemplateSyntaxError:expected token ',', got 'for'",
+      "is_actionable": false,
+      "original_message": "expected token ',', got 'for'",
+      "original_traceback": "Traceback (most recent call last):\n  File \"/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_haystack_1iq1_cle/_runner.py\", line 20, in main\n    exec('from solution import *\\n\\n# Test: dev_001\\nresult = classify_claim({\\'claim_id\\': \\'CLM-001\\', \\'description\\': \\'Minor fender bender in parking lot. My car was hit while parked. Other driver admitted fault.\\', \\'damage_estimate\\': 1200, \\'parties_involved\\': 2, \\'has_injury\\': False, \\'liability_clear\\': True, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'simple\\', f\"Expected \\'simple\\', got \\'{result[\\'classification\\']}\\' for dev_001\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_002\\nresult = classify_claim({\\'claim_id\\': \\'CLM-002\\', \\'description\\': \\'Multi-vehicle pileup on highway. Three cars involved, one driver taken to hospital with neck pain.\\', \\'damage_estimate\\': 25000, \\'parties_involved\\': 3, \\'has_injury\\': True, \\'liability_clear\\': False, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'complex\\', f\"Expected \\'complex\\', got \\'{result[\\'classification\\']}\\' for dev_002\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_003\\nresult = classify_claim({\\'claim_id\\': \\'CLM-003\\', \\'description\\': \\'Delivery truck backed into storefront causing significant structural damage.\\', \\'damage_estimate\\': 45000, \\'parties_involved\\': 2, \\'has_injury\\': False, \\'liability_clear\\': True, \\'vehicle_type\\': \\'commercial\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'complex\\', f\"Expected \\'complex\\', got \\'{result[\\'classification\\']}\\' for dev_003\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_004\\nresult = classify_claim({\\'claim_id\\': \\'CLM-004\\', \\'description\\': \\'Shopping cart rolled into my car door in supermarket parking lot.\\', \\'damage_estimate\\': 450, \\'parties_involved\\': 1, \\'has_injury\\': False, \\'liability_clear\\': True, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'simple\\', f\"Expected \\'simple\\', got \\'{result[\\'classification\\']}\\' for dev_004\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_005\\nresult = classify_claim({\\'claim_id\\': \\'CLM-005\\', \\'description\\': \\'Two cars collided at intersection. Both drivers claim the other ran the red light. Dashcam footage is unclear.\\', \\'damage_estimate\\': 8000, \\'parties_involved\\': 2, \\'has_injury\\': False, \\'liability_clear\\': False, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'complex\\', f\"Expected \\'complex\\', got \\'{result[\\'classification\\']}\\' for dev_005\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\nprint(\\'All development tests passed!\\')')\n  File \"<string>\", line 4, in <module>\n  File \"/private/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_haystack_1iq1_cle/solution.py\", line 81, in classify_claim\n    prompt_builder = PromptBuilder(template=template)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/srepho/Downloads/ClaudeDev/fwork_learnability/venvs/haystack/lib/python3.12/site-packages/haystack/core/component/component.py\", line 288, in __call__\n    instance = super().__call__(*args, **kwargs)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/srepho/Downloads/ClaudeDev/fwork_learnability/venvs/haystack/lib/python3.12/site-packages/haystack/components/builders/prompt_builder.py\", line 176, in __init__\n    self.template = self._env.from_string(template)\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/srepho/Downloads/ClaudeDev/fwork_learnability/venvs/haystack/lib/python3.12/site-packages/jinja2/environment.py\", line 1111, in from_string\n    return cls.from_code(self, self.compile(source), gs, None)\n                               ^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/srepho/Downloads/ClaudeDev/fwork_learnability/venvs/haystack/lib/python3.12/site-packages/jinja2/environment.py\", line 771, in compile\n    self.handle_exception(source=source_hint)\n  File \"/Users/srepho/Downloads/ClaudeDev/fwork_learnability/venvs/haystack/lib/python3.12/site-packages/jinja2/environment.py\", line 942, in handle_exception\n    raise rewrite_traceback_stack(source=source)\n  File \"<unknown>\", line 42, in template\njinja2.exceptions.TemplateSyntaxError: expected token ',', got 'for'\n"
+    }
+  ],
+  "hallucination_result": {
+    "total_api_calls": 4,
+    "valid_calls": 0,
+    "invented_calls": 4,
+    "version_conflict_calls": 0,
+    "hallucinated_symbols": [
+      "OpenAIGenerator",
+      "Secret.from_env_var",
+      "Pipeline",
+      "PromptBuilder"
+    ]
+  },
+  "static_compliance": {
+    "passed": true,
+    "has_import": true,
+    "has_framework_symbols": true,
+    "imported_modules": [
+      "json",
+      "typing",
+      "typing.Dict",
+      "typing.Any",
+      "haystack",
+      "haystack.Pipeline",
+      "haystack.components.builders",
+      "haystack.components.builders.PromptBuilder",
+      "haystack.components.generators",
+      "haystack.components.generators.OpenAIGenerator",
+      "haystack.utils",
+      "haystack.utils.Secret"
+    ],
+    "used_symbols": [
+      "Secret.from_env_var",
+      "PromptBuilder",
+      "OpenAIGenerator",
+      "Secret",
+      "Pipeline"
+    ],
+    "missing_requirements": []
+  },
+  "contradiction_analysis": null,
+  "python_version": "",
+  "dependency_versions": {}
+}

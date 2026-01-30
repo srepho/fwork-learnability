@@ -8,7 +8,7 @@ This benchmark measures **LLM-assisted framework usability** using a "Turns to W
 
 ### Key Features
 
-- **Temporal Firewall**: Uses DeepSeek V3 (training cutoff Dec 2024) to measure true learnability vs memorization
+- **Temporal Firewall**: Uses DeepSeek V3 (training cutoff mid-2024) to measure true learnability vs memorization
 - **Three-Tier Tasks**: Classification (Tier 1), Tool Use (Tier 2), Agent-Native (Tier 3)
 - **Four Documentation Levels**: None, Minimal, Moderate, Full
 - **Hidden Test Sets**: Development tests for feedback, hidden tests for final scoring

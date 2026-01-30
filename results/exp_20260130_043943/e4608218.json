@@ -1,0 +1,85 @@
+{
+  "trial_id": "e4608218",
+  "experiment_id": "exp_20260130_043943",
+  "timestamp": "2026-01-30T04:54:14.790400",
+  "framework": "anthropic-agents",
+  "framework_version": "latest",
+  "doc_level": "minimal",
+  "doc_hash": "280a3eab3d0321cb",
+  "doc_token_count": 35,
+  "task_tier": 1,
+  "task_id": "tier1_claims_classification",
+  "model": "deepseek-v3",
+  "run_number": 1,
+  "is_contradiction_test": false,
+  "result": {
+    "trial_id": "e4608218",
+    "framework": "anthropic-agents",
+    "doc_level": "minimal",
+    "task_tier": 1,
+    "model": "DeepSeek (deepseek-chat)",
+    "outcome": "success",
+    "final_turn": 1,
+    "dev_set_pass": true,
+    "hidden_set_pass": false,
+    "hidden_set_score": 0.0,
+    "compliance_check_pass": false,
+    "total_tokens": 2769,
+    "turns": [
+      {
+        "turn_number": 1,
+        "outcome": "success",
+        "code_hash": "9cd93d94e53fc11f",
+        "code_loc": 284,
+        "error_type": null,
+        "error_message": null,
+        "tokens_generated": 2288,
+        "execution_time_ms": 7884.089231491089
+      }
+    ]
+  },
+  "metrics": {
+    "turns_to_success": 1,
+    "success": true,
+    "first_attempt_success": true,
+    "total_tokens": 2769,
+    "error_types": {},
+    "meaningful_error_rate": 0.0,
+    "self_correction_ratio": 1.0,
+    "hallucination_rate": 0.0,
+    "invented_rate": 0.0,
+    "version_conflict_rate": 0.0,
+    "compliance_pass": false,
+    "framework_bypass": true,
+    "hidden_set_pass": false,
+    "hidden_set_score": 0.0
+  },
+  "error_analyses": [],
+  "hallucination_result": {
+    "total_api_calls": 0,
+    "valid_calls": 0,
+    "invented_calls": 0,
+    "version_conflict_calls": 0,
+    "hallucinated_symbols": []
+  },
+  "static_compliance": {
+    "passed": false,
+    "has_import": false,
+    "has_framework_symbols": false,
+    "imported_modules": [
+      "anthropic",
+      "typing",
+      "typing.Dict",
+      "typing.Any",
+      "json",
+      "re"
+    ],
+    "used_symbols": [],
+    "missing_requirements": [
+      "Must import from anthropic_agents"
+    ]
+  },
+  "contradiction_analysis": null,
+  "python_version": "",
+  "dependency_versions": {}
+}

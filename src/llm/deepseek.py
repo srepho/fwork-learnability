@@ -1,9 +1,17 @@
 """DeepSeek V3 client implementation."""
 
+import time
+
 import httpx
 import tiktoken
 
 from .base import LLMClient, LLMResponse
+
+
+# Retry configuration
+MAX_RETRIES = 3
+RETRY_DELAY = 2  # seconds
+RETRY_MULTIPLIER = 2  # exponential backoff
 
 
 class DeepSeekClient(LLMClient):
@@ -56,9 +64,31 @@ class DeepSeekClient(LLMClient):
             "max_tokens": max_tokens,
         }
 
-        response = self._client.post("/chat/completions", json=payload)
-        response.raise_for_status()
-        data = response.json()
+        # Retry logic with exponential backoff
+        last_error = None
+        delay = RETRY_DELAY
+
+        for attempt in range(MAX_RETRIES + 1):
+            try:
+                response = self._client.post("/chat/completions", json=payload)
+                response.raise_for_status()
+                data = response.json()
+                break
+            except (httpx.RemoteProtocolError, httpx.ReadError, httpx.ConnectError) as e:
+                last_error = e
+                if attempt < MAX_RETRIES:
+                    time.sleep(delay)
+                    delay *= RETRY_MULTIPLIER
+                else:
+                    raise
+            except httpx.HTTPStatusError as e:
+                # Retry on 5xx errors
+                if e.response.status_code >= 500 and attempt < MAX_RETRIES:
+                    last_error = e
+                    time.sleep(delay)
+                    delay *= RETRY_MULTIPLIER
+                else:
+                    raise
 
         choice = data["choices"][0]
         usage = data.get("usage", {})

@@ -1,26 +1,46 @@
-Version: 2.23
+# Haystack v2 Documentation
 
-Haystack is an **open-source AI framework** for building production-ready **AI Agents**, **powerful RAG applications** and **scalable multimodal search systems**. Build pipelines using reusable components, each responsible for specific tasks. Customize and extend pipelines to match your requirements. Learn more about Haystack and how it works.
+## Creating Pipelines
 
-Welcome to Haystack
+Haystack v2 uses a component-based pipeline architecture:
 
-To skip the introductions and go directly to installing and creating a search app, see [Get Started](/docs/get-started).
+```python
+from haystack import Pipeline
+from haystack.components.builders import PromptBuilder
+from haystack.components.generators import OpenAIGenerator
+from haystack.utils import Secret
 
-Haystack is an open-source AI orchestration framework that you can use to build powerful, production-ready applications with Large Language Models (LLMs) for various use cases. Whether you’re creating autonomous agents, multimodal apps, or scalable RAG systems, Haystack provides the tools to move from idea to production easily.
+# Create components
+prompt_builder = PromptBuilder(template="""
+Given the following context, answer the question.
+Context: {{context}}
+Question: {{question}}
+Answer:
+""")
 
-Haystack is designed in a modular way, allowing you to combine the best technology from OpenAI, Google, Anthropic, and open-source projects like Hugging Face's Transformers.
+generator = OpenAIGenerator(
+    model="gpt-3.5-turbo",
+    api_key=Secret.from_env_var("OPENAI_API_KEY")
+)
 
-The core foundation of Haystack consists of components and pipelines, along with Document Stores, Agents, Tools, and many integrations. Read more about Haystack concepts in the [Haystack Concepts Overview](/docs/concepts-overview).
+# Build pipeline
+pipeline = Pipeline()
+pipeline.add_component("prompt", prompt_builder)
+pipeline.add_component("generator", generator)
+pipeline.connect("prompt", "generator")
 
-Supported by an engaged community of developers, Haystack has grown into a comprehensive and user-friendly framework for LLM-based development.
+# Run pipeline
+result = pipeline.run({
+    "prompt": {
+        "context": "The capital of France is Paris.",
+        "question": "What is the capital of France?"
+    }
+})
+print(result["generator"]["replies"][0])
+```
 
-Looking to scale with confidence?
-
-If your team needs **enterprise-grade support, best practices, and deployment guidance** to run Haystack in production, check out **Haystack Enterprise Starter**.
-
-📜 [Learn more about Haystack Enterprise Starter](https://haystack.deepset.ai/blog/announcing-haystack-enterprise)
-🤝 [Get in touch with our team](https://www.deepset.ai/products-and-services/haystack-enterprise-starter)
-
-👉 For platform tooling to **manage data, pipelines, testing, and governance at scale**, explore the [Haystack Enterprise Platform](https://www.deepset.ai/products-and-services/haystack-enterprise-platform).
-
-Copy
+## Key Components
+- **PromptBuilder**: Builds prompts from templates with variables
+- **OpenAIGenerator**: Generates text using OpenAI models
+- **Pipeline**: Connects components together
+- **Secret**: Securely handles API keys

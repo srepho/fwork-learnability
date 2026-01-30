@@ -86,7 +86,7 @@ Do **not** include turns 1 through N-2. This isolates each correction attempt an
 
 | Model | Release/Cutoff | Contamination Risk |
 |-------|----------------|-------------------|
-| DeepSeek V3 | Dec 2024 | 🛡️ Cannot know frameworks released in 2025 |
+| DeepSeek V3 | Mid-2024 | 🛡️ Cannot know frameworks released after mid-2024 |
 | Qwen 2.5 Coder | Nov 2024 | 🛡️ Cannot know frameworks released in 2025 |
 | Claude 4.5 Sonnet | Sept 2025 | ⚠️ High risk—likely trained on beta versions |
 
@@ -495,7 +495,7 @@ Every trial must log sufficient data for reproducibility and debugging. Recommen
   "doc_token_count": 3420,
   "task_tier": 2,
   "model": "deepseek-v3",
-  "model_version": "2024-12-01",
+  "model_version": "2024-07-01",
   
   "turns": [
     {

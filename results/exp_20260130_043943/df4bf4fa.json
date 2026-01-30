@@ -1,0 +1,109 @@
+{
+  "trial_id": "df4bf4fa",
+  "experiment_id": "exp_20260130_043943",
+  "timestamp": "2026-01-30T05:31:40.865679",
+  "framework": "openai-agents",
+  "framework_version": "latest",
+  "doc_level": "none",
+  "doc_hash": "",
+  "doc_token_count": 0,
+  "task_tier": 1,
+  "task_id": "tier1_claims_classification",
+  "model": "deepseek-v3",
+  "run_number": 2,
+  "is_contradiction_test": false,
+  "result": {
+    "trial_id": "df4bf4fa",
+    "framework": "openai-agents",
+    "doc_level": "none",
+    "task_tier": 1,
+    "model": "DeepSeek (deepseek-chat)",
+    "outcome": "success",
+    "final_turn": 2,
+    "dev_set_pass": true,
+    "hidden_set_pass": false,
+    "hidden_set_score": 0.0,
+    "compliance_check_pass": false,
+    "total_tokens": 8728,
+    "turns": [
+      {
+        "turn_number": 1,
+        "outcome": "error",
+        "code_hash": "7f1902311feb8ee8",
+        "code_loc": 291,
+        "error_type": "ModuleNotFoundError",
+        "error_message": "No module named 'dotenv'",
+        "tokens_generated": 2620,
+        "execution_time_ms": 844.5570468902588
+      },
+      {
+        "turn_number": 2,
+        "outcome": "success",
+        "code_hash": "df74b2ee4df48843",
+        "code_loc": 314,
+        "error_type": null,
+        "error_message": null,
+        "tokens_generated": 2741,
+        "execution_time_ms": 10467.5612449646
+      }
+    ]
+  },
+  "metrics": {
+    "turns_to_success": 2,
+    "success": true,
+    "first_attempt_success": false,
+    "total_tokens": 8728,
+    "error_types": {
+      "ModuleNotFoundError": 1
+    },
+    "meaningful_error_rate": 0.0,
+    "self_correction_ratio": 1.0,
+    "hallucination_rate": 0.0,
+    "invented_rate": 0.0,
+    "version_conflict_rate": 0.0,
+    "compliance_pass": false,
+    "framework_bypass": true,
+    "hidden_set_pass": false,
+    "hidden_set_score": 0.0
+  },
+  "error_analyses": [
+    {
+      "category": "ErrorCategory.IMPORT",
+      "origin": "ErrorOrigin.USER_CODE",
+      "exception_type": "ModuleNotFoundError",
+      "signature": "ModuleNotFoundError:No module named 'dotenv'",
+      "is_actionable": true,
+      "original_message": "No module named 'dotenv'",
+      "original_traceback": "Traceback (most recent call last):\n  File \"/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_openai-agents_aeozkxdq/_runner.py\", line 17, in main\n    import solution\n  File \"/private/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_openai-agents_aeozkxdq/solution.py\", line 8, in <module>\n    from dotenv import load_dotenv\nModuleNotFoundError: No module named 'dotenv'\n"
+    }
+  ],
+  "hallucination_result": {
+    "total_api_calls": 0,
+    "valid_calls": 0,
+    "invented_calls": 0,
+    "version_conflict_calls": 0,
+    "hallucinated_symbols": []
+  },
+  "static_compliance": {
+    "passed": false,
+    "has_import": false,
+    "has_framework_symbols": false,
+    "imported_modules": [
+      "os",
+      "typing",
+      "typing.Dict",
+      "typing.Any",
+      "openai",
+      "openai.OpenAI",
+      "re"
+    ],
+    "used_symbols": [],
+    "missing_requirements": [
+      "Must import from openai_agents",
+      "Must use at least one of: ['Agent', 'Runner', 'function_tool']"
+    ]
+  },
+  "contradiction_analysis": null,
+  "python_version": "",
+  "dependency_versions": {}
+}

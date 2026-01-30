@@ -7,6 +7,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Callable
 
+from ..analysis.contamination import DocContradictionTest
 from ..analysis.errors import ErrorAnalyzer, NormalizedError
 from ..analysis.hallucination import HallucinationDetector
 from ..analysis.metrics import MetricsCalculator, TrialMetrics
@@ -64,9 +65,12 @@ class TrialLog:
     model: str
     run_number: int
 
+    # Contradiction test flag
+    is_contradiction_test: bool = False
+
     # Result
-    result: dict
-    metrics: dict
+    result: dict = field(default_factory=dict)
+    metrics: dict = field(default_factory=dict)
 
     # Error analysis
     error_analyses: list[dict] = field(default_factory=list)
@@ -76,6 +80,9 @@ class TrialLog:
 
     # Compliance
     static_compliance: dict | None = None
+
+    # Contamination analysis (for contradiction tests)
+    contradiction_analysis: dict | None = None
 
     # Metadata
     python_version: str = ""
@@ -179,6 +186,7 @@ class ExperimentRunner:
         max_turns: int = 10,
         timeout_seconds: int = 60,
         framework_version: str = "latest",
+        use_contradiction_docs: bool = False,
     ) -> TrialLog:
         """Run a single trial.
 
@@ -192,6 +200,8 @@ class ExperimentRunner:
             max_turns: Maximum conversation turns.
             timeout_seconds: Execution timeout.
             framework_version: Framework version string.
+            use_contradiction_docs: If True, use modified docs with renamed APIs
+                to test if model is using training data vs documentation.
 
         Returns:
             TrialLog with complete trial data.
@@ -205,7 +215,12 @@ class ExperimentRunner:
             raise ValueError(f"No task defined for tier {task_tier}")
 
         # Get documentation
-        doc_content = self.corpus.get_documentation(framework, framework_version, doc_level)
+        if use_contradiction_docs:
+            doc_content = self.corpus.get_contradiction_documentation(
+                framework, framework_version, doc_level
+            )
+        else:
+            doc_content = self.corpus.get_documentation(framework, framework_version, doc_level)
         doc_info = self.corpus.get_snapshot_info(framework, framework_version, doc_level) or {}
 
         # Get LLM client
@@ -305,6 +320,27 @@ class ExperimentRunner:
             comp_result = compliance_checker.check(result.turns[-1].code)
             static_compliance = asdict(comp_result)
 
+        # Analyze contradiction test results
+        contradiction_analysis = None
+        if use_contradiction_docs and result.turns and result.turns[-1].code:
+            try:
+                contradiction_test = DocContradictionTest(framework)
+                adherence_result = contradiction_test.analyze_adherence(result.turns[-1].code)
+                contradiction_analysis = {
+                    "used_modified_api": adherence_result.used_modified_api,
+                    "used_real_api": adherence_result.used_real_api,
+                    "modified_api_count": adherence_result.modified_api_count,
+                    "real_api_count": adherence_result.real_api_count,
+                    "adherence_score": adherence_result.adherence_score,
+                    "interpretation": (
+                        "follows_docs" if adherence_result.adherence_score > 0.5
+                        else "uses_training_data" if adherence_result.used_real_api
+                        else "unknown"
+                    ),
+                }
+            except Exception:
+                pass  # Contradiction analysis failed
+
         # Build trial log
         return TrialLog(
             trial_id=trial_id,
@@ -312,18 +348,20 @@ class ExperimentRunner:
             timestamp=timestamp,
             framework=framework,
             framework_version=framework_version,
-            doc_level=doc_level.value,
+            doc_level=doc_level.value + ("_contradiction" if use_contradiction_docs else ""),
             doc_hash=doc_info.get("content_hash", ""),
             doc_token_count=doc_info.get("token_count", 0),
             task_tier=task_tier,
             task_id=task.task_id,
             model=model,
             run_number=run_number,
+            is_contradiction_test=use_contradiction_docs,
             result=self._serialize_result(result),
             metrics=asdict(metrics),
             error_analyses=error_analyses,
             hallucination_result=hallucination_result,
             static_compliance=static_compliance,
+            contradiction_analysis=contradiction_analysis,
         )
 
     def _serialize_result(self, result: TrialResult) -> dict:

@@ -1,0 +1,253 @@
+{
+  "trial_id": "77b54df7",
+  "experiment_id": "exp_20260130_043934",
+  "timestamp": "2026-01-30T05:31:17.354572",
+  "framework": "langgraph",
+  "framework_version": "latest",
+  "doc_level": "minimal",
+  "doc_hash": "dc9ec822e6e2f88f",
+  "doc_token_count": 48,
+  "task_tier": 1,
+  "task_id": "tier1_claims_classification",
+  "model": "deepseek-v3",
+  "run_number": 1,
+  "is_contradiction_test": false,
+  "result": {
+    "trial_id": "77b54df7",
+    "framework": "langgraph",
+    "doc_level": "minimal",
+    "task_tier": 1,
+    "model": "DeepSeek (deepseek-chat)",
+    "outcome": "success",
+    "final_turn": 10,
+    "dev_set_pass": true,
+    "hidden_set_pass": false,
+    "hidden_set_score": 0.0,
+    "compliance_check_pass": true,
+    "total_tokens": 77048,
+    "turns": [
+      {
+        "turn_number": 1,
+        "outcome": "error",
+        "code_hash": "e27902c8a37e2afc",
+        "code_loc": 366,
+        "error_type": "ImportError",
+        "error_message": "cannot import name 'MemorySaver' from 'langgraph.checkpoint' (unknown location)",
+        "tokens_generated": 2875,
+        "execution_time_ms": 817.2380924224854
+      },
+      {
+        "turn_number": 2,
+        "outcome": "error",
+        "code_hash": "5bdf73ea0e751c96",
+        "code_loc": 375,
+        "error_type": "ModuleNotFoundError",
+        "error_message": "No module named 'langchain_openai'",
+        "tokens_generated": 3179,
+        "execution_time_ms": 1077.4221420288086
+      },
+      {
+        "turn_number": 3,
+        "outcome": "error",
+        "code_hash": "9e3f76b7a9444cdc",
+        "code_loc": 476,
+        "error_type": "ImportError",
+        "error_message": "cannot import name 'ChatOpenAI' from 'langchain.chat_models' (/Users/srepho/Downloads/ClaudeDev/fwork_learnability/venvs/langgraph/lib/python3.12/site-packages/langchain/chat_models/__init__.py)",
+        "tokens_generated": 4096,
+        "execution_time_ms": 810.5831146240234
+      },
+      {
+        "turn_number": 4,
+        "outcome": "error",
+        "code_hash": "b96fc9949bec697b",
+        "code_loc": 475,
+        "error_type": "ModuleNotFoundError",
+        "error_message": "No module named 'langchain_openai'",
+        "tokens_generated": 4096,
+        "execution_time_ms": 758.991003036499
+      },
+      {
+        "turn_number": 5,
+        "outcome": "extraction_failed",
+        "code_hash": null,
+        "code_loc": 0,
+        "error_type": null,
+        "error_message": "No Python code block found in response",
+        "tokens_generated": 4096,
+        "execution_time_ms": 0
+      },
+      {
+        "turn_number": 6,
+        "outcome": "error",
+        "code_hash": "b96fc9949bec697b",
+        "code_loc": 475,
+        "error_type": "ModuleNotFoundError",
+        "error_message": "No module named 'langchain_openai'",
+        "tokens_generated": 3869,
+        "execution_time_ms": 824.146032333374
+      },
+      {
+        "turn_number": 7,
+        "outcome": "extraction_failed",
+        "code_hash": null,
+        "code_loc": 0,
+        "error_type": null,
+        "error_message": "No Python code block found in response",
+        "tokens_generated": 4096,
+        "execution_time_ms": 0
+      },
+      {
+        "turn_number": 8,
+        "outcome": "error",
+        "code_hash": "b96fc9949bec697b",
+        "code_loc": 475,
+        "error_type": "ModuleNotFoundError",
+        "error_message": "No module named 'langchain_openai'",
+        "tokens_generated": 3869,
+        "execution_time_ms": 1037.4977588653564
+      },
+      {
+        "turn_number": 9,
+        "outcome": "error",
+        "code_hash": "a04250dfe5dc9c10",
+        "code_loc": 371,
+        "error_type": "AssertionError",
+        "error_message": "Expected 'simple', got 'complex' for dev_001",
+        "tokens_generated": 3386,
+        "execution_time_ms": 730.7038307189941
+      },
+      {
+        "turn_number": 10,
+        "outcome": "success",
+        "code_hash": "2062cae37c17bab2",
+        "code_loc": 377,
+        "error_type": null,
+        "error_message": null,
+        "tokens_generated": 3661,
+        "execution_time_ms": 746.8268871307373
+      }
+    ]
+  },
+  "metrics": {
+    "turns_to_success": 10,
+    "success": true,
+    "first_attempt_success": false,
+    "total_tokens": 77048,
+    "error_types": {
+      "ImportError": 2,
+      "ModuleNotFoundError": 4,
+      "AssertionError": 1
+    },
+    "meaningful_error_rate": 0.0,
+    "self_correction_ratio": 0.75,
+    "hallucination_rate": 0.0,
+    "invented_rate": 0.0,
+    "version_conflict_rate": 0.0,
+    "compliance_pass": true,
+    "framework_bypass": false,
+    "hidden_set_pass": false,
+    "hidden_set_score": 0.0
+  },
+  "error_analyses": [
+    {
+      "category": "ErrorCategory.IMPORT",
+      "origin": "ErrorOrigin.USER_CODE",
+      "exception_type": "ImportError",
+      "signature": "ImportError:cannot import name 'MemorySaver' from '...' (unknown location)",
+      "is_actionable": true,
+      "original_message": "cannot import name 'MemorySaver' from 'langgraph.checkpoint' (unknown location)",
+      "original_traceback": "Traceback (most recent call last):\n  File \"/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_langgraph_2tb10vw6/_runner.py\", line 17, in main\n    import solution\n  File \"/private/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_langgraph_2tb10vw6/solution.py\", line 10, in <module>\n    from langgraph.checkpoint import MemorySaver\nImportError: cannot import name 'MemorySaver' from 'langgraph.checkpoint' (unknown location)\n"
+    },
+    {
+      "category": "ErrorCategory.IMPORT",
+      "origin": "ErrorOrigin.USER_CODE",
+      "exception_type": "ModuleNotFoundError",
+      "signature": "ModuleNotFoundError:No module named 'langchain_openai'",
+      "is_actionable": true,
+      "original_message": "No module named 'langchain_openai'",
+      "original_traceback": "Traceback (most recent call last):\n  File \"/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_langgraph_2tb10vw6/_runner.py\", line 17, in main\n    import solution\n  File \"/private/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_langgraph_2tb10vw6/solution.py\", line 11, in <module>\n    from langchain_openai import ChatOpenAI\nModuleNotFoundError: No module named 'langchain_openai'\n"
+    },
+    {
+      "category": "ErrorCategory.IMPORT",
+      "origin": "ErrorOrigin.FRAMEWORK_CONTEXT",
+      "exception_type": "ImportError",
+      "signature": "ImportError:cannot import name 'ChatOpenAI' from '...' (module.py)",
+      "is_actionable": true,
+      "original_message": "cannot import name 'ChatOpenAI' from 'langchain.chat_models' (/Users/srepho/Downloads/ClaudeDev/fwork_learnability/venvs/langgraph/lib/python3.12/site-packages/langchain/chat_models/__init__.py)",
+      "original_traceback": "Traceback (most recent call last):\n  File \"/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_langgraph_2tb10vw6/_runner.py\", line 17, in main\n    import solution\n  File \"/private/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_langgraph_2tb10vw6/solution.py\", line 11, in <module>\n    from langchain.chat_models import ChatOpenAI\nImportError: cannot import name 'ChatOpenAI' from 'langchain.chat_models' (/Users/srepho/Downloads/ClaudeDev/fwork_learnability/venvs/langgraph/lib/python3.12/site-packages/langchain/chat_models/__init__.py)\n"
+    },
+    {
+      "category": "ErrorCategory.IMPORT",
+      "origin": "ErrorOrigin.USER_CODE",
+      "exception_type": "ModuleNotFoundError",
+      "signature": "ModuleNotFoundError:No module named 'langchain_openai'",
+      "is_actionable": true,
+      "original_message": "No module named 'langchain_openai'",
+      "original_traceback": "Traceback (most recent call last):\n  File \"/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_langgraph_2tb10vw6/_runner.py\", line 17, in main\n    import solution\n  File \"/private/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_langgraph_2tb10vw6/solution.py\", line 10, in <module>\n    from langchain_openai import ChatOpenAI\nModuleNotFoundError: No module named 'langchain_openai'\n"
+    },
+    {
+      "category": "ErrorCategory.IMPORT",
+      "origin": "ErrorOrigin.USER_CODE",
+      "exception_type": "ModuleNotFoundError",
+      "signature": "ModuleNotFoundError:No module named 'langchain_openai'",
+      "is_actionable": true,
+      "original_message": "No module named 'langchain_openai'",
+      "original_traceback": "Traceback (most recent call last):\n  File \"/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_langgraph_2tb10vw6/_runner.py\", line 17, in main\n    import solution\n  File \"/private/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_langgraph_2tb10vw6/solution.py\", line 10, in <module>\n    from langchain_openai import ChatOpenAI\nModuleNotFoundError: No module named 'langchain_openai'\n"
+    },
+    {
+      "category": "ErrorCategory.IMPORT",
+      "origin": "ErrorOrigin.USER_CODE",
+      "exception_type": "ModuleNotFoundError",
+      "signature": "ModuleNotFoundError:No module named 'langchain_openai'",
+      "is_actionable": true,
+      "original_message": "No module named 'langchain_openai'",
+      "original_traceback": "Traceback (most recent call last):\n  File \"/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_langgraph_2tb10vw6/_runner.py\", line 17, in main\n    import solution\n  File \"/private/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_langgraph_2tb10vw6/solution.py\", line 10, in <module>\n    from langchain_openai import ChatOpenAI\nModuleNotFoundError: No module named 'langchain_openai'\n"
+    },
+    {
+      "category": "ErrorCategory.TYPE",
+      "origin": "ErrorOrigin.USER_CODE",
+      "exception_type": "AssertionError",
+      "signature": "AssertionError:Expected 'simple', got 'complex' for dev_001",
+      "is_actionable": true,
+      "original_message": "Expected 'simple', got 'complex' for dev_001",
+      "original_traceback": "Traceback (most recent call last):\n  File \"/var/folders/1l/hzp2vy1s0t30w393mbtz3spw0000gn/T/sandbox_langgraph_2tb10vw6/_runner.py\", line 20, in main\n    exec('from solution import *\\n\\n# Test: dev_001\\nresult = classify_claim({\\'claim_id\\': \\'CLM-001\\', \\'description\\': \\'Minor fender bender in parking lot. My car was hit while parked. Other driver admitted fault.\\', \\'damage_estimate\\': 1200, \\'parties_involved\\': 2, \\'has_injury\\': False, \\'liability_clear\\': True, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'simple\\', f\"Expected \\'simple\\', got \\'{result[\\'classification\\']}\\' for dev_001\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_002\\nresult = classify_claim({\\'claim_id\\': \\'CLM-002\\', \\'description\\': \\'Multi-vehicle pileup on highway. Three cars involved, one driver taken to hospital with neck pain.\\', \\'damage_estimate\\': 25000, \\'parties_involved\\': 3, \\'has_injury\\': True, \\'liability_clear\\': False, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'complex\\', f\"Expected \\'complex\\', got \\'{result[\\'classification\\']}\\' for dev_002\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_003\\nresult = classify_claim({\\'claim_id\\': \\'CLM-003\\', \\'description\\': \\'Delivery truck backed into storefront causing significant structural damage.\\', \\'damage_estimate\\': 45000, \\'parties_involved\\': 2, \\'has_injury\\': False, \\'liability_clear\\': True, \\'vehicle_type\\': \\'commercial\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'complex\\', f\"Expected \\'complex\\', got \\'{result[\\'classification\\']}\\' for dev_003\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_004\\nresult = classify_claim({\\'claim_id\\': \\'CLM-004\\', \\'description\\': \\'Shopping cart rolled into my car door in supermarket parking lot.\\', \\'damage_estimate\\': 450, \\'parties_involved\\': 1, \\'has_injury\\': False, \\'liability_clear\\': True, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'simple\\', f\"Expected \\'simple\\', got \\'{result[\\'classification\\']}\\' for dev_004\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\n# Test: dev_005\\nresult = classify_claim({\\'claim_id\\': \\'CLM-005\\', \\'description\\': \\'Two cars collided at intersection. Both drivers claim the other ran the red light. Dashcam footage is unclear.\\', \\'damage_estimate\\': 8000, \\'parties_involved\\': 2, \\'has_injury\\': False, \\'liability_clear\\': False, \\'vehicle_type\\': \\'personal\\'})\\nassert \\'classification\\' in result, \"Result must have \\'classification\\' key\"\\nassert \\'confidence\\' in result, \"Result must have \\'confidence\\' key\"\\nassert \\'reasoning\\' in result, \"Result must have \\'reasoning\\' key\"\\nassert result[\\'classification\\'] in [\\'simple\\', \\'complex\\'], f\"Invalid classification: {result[\\'classification\\']}\"\\nassert result[\\'classification\\'] == \\'complex\\', f\"Expected \\'complex\\', got \\'{result[\\'classification\\']}\\' for dev_005\"\\nassert 0 <= result[\\'confidence\\'] <= 1, f\"Confidence must be between 0 and 1, got {result[\\'confidence\\']}\"\\n\\n\\nprint(\\'All development tests passed!\\')')\n  File \"<string>\", line 9, in <module>\nAssertionError: Expected 'simple', got 'complex' for dev_001\n"
+    }
+  ],
+  "hallucination_result": {
+    "total_api_calls": 1,
+    "valid_calls": 0,
+    "invented_calls": 1,
+    "version_conflict_calls": 0,
+    "hallucinated_symbols": [
+      "StateGraph"
+    ]
+  },
+  "static_compliance": {
+    "passed": true,
+    "has_import": true,
+    "has_framework_symbols": true,
+    "imported_modules": [
+      "typing",
+      "typing.TypedDict",
+      "typing.Literal",
+      "typing.Annotated",
+      "langgraph.graph",
+      "langgraph.graph.StateGraph",
+      "langgraph.graph.END",
+      "langgraph.graph.message",
+      "langgraph.graph.message.add_messages",
+      "json",
+      "langchain_openai",
+      "langchain_openai.ChatOpenAI"
+    ],
+    "used_symbols": [
+      "add_messages",
+      "StateGraph",
+      "END"
+    ],
+    "missing_requirements": []
+  },
+  "contradiction_analysis": null,
+  "python_version": "",
+  "dependency_versions": {}
+}

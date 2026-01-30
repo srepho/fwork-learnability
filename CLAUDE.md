@@ -8,9 +8,9 @@ This is a research project for measuring **LLM-assisted framework usability** - 
 
 **GitHub Repo**: https://github.com/srepho/fwork-learnability
 
-## Current Status: Phase 1 Complete
+## Current Status: Phase 2 In Progress
 
-### What Was Accomplished
+### What Was Accomplished in Phase 1
 
 1. **Core Infrastructure** ✅
    - LLM client (DeepSeek V3 with temperature=0)
@@ -26,54 +26,70 @@ This is a research project for measuring **LLM-assisted framework usability** - 
    - Tier 2: Claims Tool Use (defined, not tested)
    - Tier 3: Claims Agent (defined, not tested)
 
-3. **Experiments Run** ✅
+3. **Initial Experiments** ✅
    - 48 trials across 4 frameworks (PydanticAI, Haystack, LangGraph, Direct API)
-   - 4 documentation levels (none, minimal, moderate, full)
-   - 3 runs per condition
+   - High contamination detected (all frameworks succeeded at "none" doc level)
 
-### Experiment Results Summary
+### Phase 2 Updates (Current Session)
 
-| Framework | Success Rate | Avg Turns | Best Doc Level |
-|-----------|-------------|-----------|----------------|
-| PydanticAI | 92% (11/12) | 3.4 | moderate |
-| Direct API | 83% (10/12) | 2.4 | moderate |
-| LangGraph | 83% (10/12) | 4.7 | minimal |
-| Haystack | 75% (9/12) | 3.0 | minimal |
+1. **Fixed Documentation Fetching** ✅
+   - Added curated documentation with real code examples
+   - Haystack: 159-325 tokens of actual code (was 26 lines of marketing)
+   - LangGraph: 191-322 tokens of actual code (was 18 tokens)
+   - New `--prefer-curated` flag in `scripts/fetch_docs.py`
 
-### Key Findings
+2. **Contamination Detection** ✅
+   - New `src/analysis/contamination.py` module
+   - Version alignment analysis (detects if model uses old vs new APIs)
+   - Doc contradiction test (renamed APIs to detect training data usage)
+   - Code fingerprinting across doc levels
+   - CLI: `python scripts/analyze_contamination.py --results-dir results/exp_XXX`
 
-1. **High Contamination**: All frameworks succeeded at "none" doc level (2-3/3) - DeepSeek V3 has these frameworks in training data
+3. **New Frameworks Added** ✅
+   - `anthropic-agents` - Anthropic Claude API with tools
+   - `openai-agents` - OpenAI API with function calling
+   - Both have curated documentation with code examples
 
-2. **Documentation Paradox**: Minimal docs often outperformed full docs
-   - Haystack: minimal (100%) > full (33%)
-   - Root cause: Doc fetching captured landing pages, not tutorials
+4. **Doc Contradiction Test** ✅
+   - Provides modified docs with renamed APIs
+   - If model uses REAL names despite modified docs → using training data
+   - Run with: `--contradiction-test` flag
 
-3. **Error Patterns** (8/48 failures):
-   - SyntaxError loop (40 occurrences): Model gets stuck on unterminated strings
-   - API hallucinations (26): PydanticAI `result_type` doesn't exist
-   - Logic errors (15): Wrong classification despite working code
+## Running Experiments
 
-## Known Issues to Fix
+```bash
+# Activate environment
+source .venv/bin/activate
 
-### 1. Documentation Fetching (HIGH PRIORITY)
-The current doc fetcher gets landing pages instead of actual tutorials:
-- Haystack "full" docs = 26 lines of marketing, no code
-- Need to fetch actual quickstart pages with code examples
-- Consider manual curation of doc snippets
+# Setup venvs for frameworks
+python scripts/setup_venvs.py --frameworks haystack langgraph anthropic-agents openai-agents
 
-**Location**: `scripts/fetch_docs.py`, `src/docs/`
+# Fetch curated docs
+python scripts/fetch_docs.py --frameworks haystack langgraph anthropic-agents openai-agents --prefer-curated
 
-### 2. Syntax Error Recovery
-Model gets stuck in SyntaxError loops (10 turns of same error):
-- Need better error feedback showing the specific problematic line
-- Consider detecting when model is "stuck" making same mistake
+# Run experiment with contradiction test
+python scripts/run_experiment.py \
+  --frameworks haystack langgraph anthropic-agents openai-agents \
+  --tiers 1 \
+  --runs 3 \
+  --contradiction-test
 
-**Location**: `src/harness/conversation.py`
+# Analyze contamination
+python scripts/analyze_contamination.py --results-dir results/exp_XXXXXXXX_XXXXXX
+```
 
-### 3. Contamination Control
-DeepSeek V3 (Dec 2024 cutoff) knows these frameworks:
-- Consider using an older model
-- Or focus on frameworks released after Dec 2024
+## Contamination Analysis
+
+From initial experiments, DeepSeek V3 shows high contamination:
+
+| Framework | Success@None | API Version | Contamination |
+|-----------|-------------|-------------|---------------|
+| PydanticAI | 100% | - | HIGH |
+| LangGraph | 100% | v0/v1 mixed | HIGH |
+| Haystack | 67% | v2 (modern) | HIGH |
+| Direct API | 67% | N/A | Expected |
+
+Key finding: Haystack uses modern v2 APIs despite being "old" - DeepSeek was trained on recent Haystack content.
 
 ## Project Structure
 
@@ -83,7 +99,7 @@ fwork_learnability/
 │   ├── harness/           # runner.py, conversation.py, sandbox.py, extractor.py
 │   ├── docs/              # corpus.py, normalizer.py
 │   ├── compliance/        # static.py, dynamic.py
-│   ├── analysis/          # errors.py, hallucination.py, metrics.py, survival.py
+│   ├── analysis/          # errors.py, hallucination.py, metrics.py, survival.py, contamination.py
 │   ├── llm/               # base.py, deepseek.py
 │   └── tasks/             # tier1/, tier2/, tier3/
 ├── tests/                 # Unit tests
@@ -91,47 +107,32 @@ fwork_learnability/
 ├── visualizations/        # Generated charts
 ├── docs_corpus/           # Snapshotted documentation
 ├── scripts/               # CLI utilities
+│   ├── run_experiment.py  # Main experiment runner
+│   ├── fetch_docs.py      # Doc fetching with curated support
+│   ├── setup_venvs.py     # Framework venv setup
+│   └── analyze_contamination.py  # Contamination analysis
 └── config/                # frameworks.yaml
 ```
-
-## Environment Setup
-
-```bash
-# Create venv and install
-python -m venv .venv
-source .venv/bin/activate
-pip install -e .
-
-# Configure API key
-cp .env.example .env
-# Edit .env with DEEPSEEK_API_KEY
-
-# Setup framework venvs
-python scripts/setup_venvs.py --frameworks pydantic-ai haystack langgraph direct-api
-
-# Run experiment
-python scripts/run_experiment.py --frameworks pydantic-ai --tiers 1 --runs 3
-```
-
-## Next Steps (Priority Order)
-
-1. **Fix doc fetching** - Get actual code examples, not landing pages
-2. **Run Tier 2/3 tasks** - Test tool use and agent-native capabilities
-3. **Improve error recovery** - Better syntax error feedback
-4. **Add more frameworks** - Anthropic Agents SDK, OpenAI Agents SDK
-5. **Statistical analysis** - More runs for significance testing
 
 ## Key Files for Common Tasks
 
 | Task | Files |
 |------|-------|
-| Add new framework | `config/frameworks.yaml`, `src/compliance/static.py` |
-| Add new task | `src/tasks/tierN/` |
+| Add new framework | `config/frameworks.yaml`, `scripts/setup_venvs.py`, `scripts/fetch_docs.py` |
+| Add curated docs | `scripts/fetch_docs.py` (CURATED_DOCS dict) |
+| Analyze contamination | `scripts/analyze_contamination.py` |
+| Run contradiction test | `scripts/run_experiment.py --contradiction-test` |
 | Modify conversation loop | `src/harness/conversation.py` |
-| Improve doc fetching | `scripts/fetch_docs.py`, `src/docs/corpus.py` |
-| Analyze results | `scripts/visualize.py`, `src/analysis/` |
 
 ## API Keys Required
 
 - `DEEPSEEK_API_KEY` - Primary model for experiments (required)
-- Other keys in `.env` are optional for future framework testing
+- `ANTHROPIC_API_KEY` - For anthropic-agents framework testing
+- `OPENAI_API_KEY` - For openai-agents framework testing
+
+## Next Steps
+
+1. **Analyze contradiction test results** - See if model follows modified docs or uses training data
+2. **Run Tier 2/3 tasks** - Test tool use and agent-native capabilities
+3. **Test with older models** - For cleaner contamination control
+4. **Add more post-cutoff frameworks** - Frameworks released after mid-2024

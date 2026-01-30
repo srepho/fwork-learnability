@@ -1,0 +1,86 @@
+{
+  "trial_id": "e259447f",
+  "experiment_id": "exp_20260130_043943",
+  "timestamp": "2026-01-30T05:52:24.638397",
+  "framework": "openai-agents",
+  "framework_version": "latest",
+  "doc_level": "full",
+  "doc_hash": "b924b1c398417e05",
+  "doc_token_count": 403,
+  "task_tier": 1,
+  "task_id": "tier1_claims_classification",
+  "model": "deepseek-v3",
+  "run_number": 2,
+  "is_contradiction_test": false,
+  "result": {
+    "trial_id": "e259447f",
+    "framework": "openai-agents",
+    "doc_level": "full",
+    "task_tier": 1,
+    "model": "DeepSeek (deepseek-chat)",
+    "outcome": "success",
+    "final_turn": 1,
+    "dev_set_pass": true,
+    "hidden_set_pass": false,
+    "hidden_set_score": 0.0,
+    "compliance_check_pass": false,
+    "total_tokens": 3167,
+    "turns": [
+      {
+        "turn_number": 1,
+        "outcome": "success",
+        "code_hash": "a077564c22613e04",
+        "code_loc": 265,
+        "error_type": null,
+        "error_message": null,
+        "tokens_generated": 1988,
+        "execution_time_ms": 17782.415866851807
+      }
+    ]
+  },
+  "metrics": {
+    "turns_to_success": 1,
+    "success": true,
+    "first_attempt_success": true,
+    "total_tokens": 3167,
+    "error_types": {},
+    "meaningful_error_rate": 0.0,
+    "self_correction_ratio": 1.0,
+    "hallucination_rate": 0.0,
+    "invented_rate": 0.0,
+    "version_conflict_rate": 0.0,
+    "compliance_pass": false,
+    "framework_bypass": true,
+    "hidden_set_pass": false,
+    "hidden_set_score": 0.0
+  },
+  "error_analyses": [],
+  "hallucination_result": {
+    "total_api_calls": 0,
+    "valid_calls": 0,
+    "invented_calls": 0,
+    "version_conflict_calls": 0,
+    "hallucinated_symbols": []
+  },
+  "static_compliance": {
+    "passed": false,
+    "has_import": false,
+    "has_framework_symbols": false,
+    "imported_modules": [
+      "openai",
+      "openai.OpenAI",
+      "json",
+      "typing",
+      "typing.Dict",
+      "typing.Any"
+    ],
+    "used_symbols": [],
+    "missing_requirements": [
+      "Must import from openai_agents",
+      "Must use at least one of: ['Agent', 'Runner', 'function_tool']"
+    ]
+  },
+  "contradiction_analysis": null,
+  "python_version": "",
+  "dependency_versions": {}
+}

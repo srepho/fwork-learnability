@@ -1,26 +1,108 @@
-Version: 2.23
+# Haystack v2 Complete Documentation
 
-Haystack is an **open-source AI framework** for building production-ready **AI Agents**, **powerful RAG applications** and **scalable multimodal search systems**. Build pipelines using reusable components, each responsible for specific tasks. Customize and extend pipelines to match your requirements. Learn more about Haystack and how it works.
+## Installation
 
-Welcome to Haystack
+```bash
+pip install haystack-ai
+```
 
-To skip the introductions and go directly to installing and creating a search app, see [Get Started](/docs/get-started).
+## Creating Pipelines
 
-Haystack is an open-source AI orchestration framework that you can use to build powerful, production-ready applications with Large Language Models (LLMs) for various use cases. Whether you’re creating autonomous agents, multimodal apps, or scalable RAG systems, Haystack provides the tools to move from idea to production easily.
+Haystack v2 uses a component-based pipeline architecture:
 
-Haystack is designed in a modular way, allowing you to combine the best technology from OpenAI, Google, Anthropic, and open-source projects like Hugging Face's Transformers.
+```python
+from haystack import Pipeline
+from haystack.components.builders import PromptBuilder
+from haystack.components.generators import OpenAIGenerator
+from haystack.utils import Secret
 
-The core foundation of Haystack consists of components and pipelines, along with Document Stores, Agents, Tools, and many integrations. Read more about Haystack concepts in the [Haystack Concepts Overview](/docs/concepts-overview).
+# Create components
+prompt_builder = PromptBuilder(template="""
+Given the following context, answer the question.
+Context: {{context}}
+Question: {{question}}
+Answer:
+""")
 
-Supported by an engaged community of developers, Haystack has grown into a comprehensive and user-friendly framework for LLM-based development.
+generator = OpenAIGenerator(
+    model="gpt-3.5-turbo",
+    api_key=Secret.from_env_var("OPENAI_API_KEY")
+)
 
-Looking to scale with confidence?
+# Build pipeline
+pipeline = Pipeline()
+pipeline.add_component("prompt", prompt_builder)
+pipeline.add_component("generator", generator)
+pipeline.connect("prompt", "generator")
 
-If your team needs **enterprise-grade support, best practices, and deployment guidance** to run Haystack in production, check out **Haystack Enterprise Starter**.
+# Run pipeline
+result = pipeline.run({
+    "prompt": {
+        "context": "The capital of France is Paris.",
+        "question": "What is the capital of France?"
+    }
+})
+print(result["generator"]["replies"][0])
+```
 
-📜 [Learn more about Haystack Enterprise Starter](https://haystack.deepset.ai/blog/announcing-haystack-enterprise)
-🤝 [Get in touch with our team](https://www.deepset.ai/products-and-services/haystack-enterprise-starter)
+## Component Reference
 
-👉 For platform tooling to **manage data, pipelines, testing, and governance at scale**, explore the [Haystack Enterprise Platform](https://www.deepset.ai/products-and-services/haystack-enterprise-platform).
+### PromptBuilder
+Creates prompts from Jinja2 templates:
+```python
+from haystack.components.builders import PromptBuilder
 
-Copy
+builder = PromptBuilder(template="Classify this: {{text}}")
+result = builder.run(text="Hello world")
+# result["prompt"] contains the rendered template
+```
+
+### OpenAIGenerator
+Generates text using OpenAI's chat models:
+```python
+from haystack.components.generators import OpenAIGenerator
+from haystack.utils import Secret
+
+generator = OpenAIGenerator(
+    model="gpt-3.5-turbo",
+    api_key=Secret.from_env_var("OPENAI_API_KEY"),
+    generation_kwargs={"temperature": 0}
+)
+result = generator.run(prompt="Say hello")
+# result["replies"] is a list of generated responses
+```
+
+### Secret
+Handles API keys securely:
+```python
+from haystack.utils import Secret
+
+# From environment variable (recommended)
+api_key = Secret.from_env_var("OPENAI_API_KEY")
+
+# From token string (not recommended for production)
+api_key = Secret.from_token("sk-...")
+```
+
+## Pipeline Connections
+
+Connect components with `pipeline.connect()`:
+```python
+pipeline = Pipeline()
+pipeline.add_component("a", ComponentA())
+pipeline.add_component("b", ComponentB())
+# Connect output of "a" to input of "b"
+pipeline.connect("a.output_name", "b.input_name")
+# Or use default names
+pipeline.connect("a", "b")
+```
+
+## Running Pipelines
+
+```python
+result = pipeline.run({
+    "component_name": {
+        "input_param": value
+    }
+})
+```

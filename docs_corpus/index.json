@@ -53,7 +53,7 @@
     "level": "minimal",
     "content_hash": "372c54a96c3878d7",
     "token_count": 44,
-    "snapshot_date": "2026-01-29T23:34:42.608015",
+    "snapshot_date": "2026-01-30T04:20:40.782207",
     "source_urls": [
       "generated"
     ]
@@ -62,26 +62,22 @@
     "framework": "haystack",
     "version": "latest",
     "level": "moderate",
-    "content_hash": "1044384f09edaabb",
-    "token_count": 319,
-    "snapshot_date": "2026-01-29T23:34:43.472559",
+    "content_hash": "d393095837ff0163",
+    "token_count": 159,
+    "snapshot_date": "2026-01-30T04:20:40.784970",
     "source_urls": [
-      "https://docs.haystack.deepset.ai/docs/intro",
-      "https://docs.haystack.deepset.ai/docs/pipelines"
+      "curated"
     ]
   },
   "haystack/latest/full": {
     "framework": "haystack",
     "version": "latest",
     "level": "full",
-    "content_hash": "1044384f09edaabb",
-    "token_count": 319,
-    "snapshot_date": "2026-01-29T23:34:44.482116",
+    "content_hash": "044631c8dc45e937",
+    "token_count": 325,
+    "snapshot_date": "2026-01-30T04:20:40.787450",
     "source_urls": [
-      "https://docs.haystack.deepset.ai/docs/intro",
-      "https://docs.haystack.deepset.ai/docs/pipelines",
-      "https://docs.haystack.deepset.ai/docs/agents",
-      "https://docs.haystack.deepset.ai/reference/"
+      "curated"
     ]
   },
   "langgraph/latest/minimal": {
@@ -90,7 +86,7 @@
     "level": "minimal",
     "content_hash": "dc9ec822e6e2f88f",
     "token_count": 48,
-    "snapshot_date": "2026-01-29T23:34:44.484555",
+    "snapshot_date": "2026-01-30T04:20:40.789720",
     "source_urls": [
       "generated"
     ]
@@ -99,26 +95,88 @@
     "framework": "langgraph",
     "version": "latest",
     "level": "moderate",
-    "content_hash": "3aa7908ffaf87b8f",
-    "token_count": 18,
-    "snapshot_date": "2026-01-29T23:34:45.109940",
+    "content_hash": "d3d1c8107f1c7141",
+    "token_count": 191,
+    "snapshot_date": "2026-01-30T04:20:40.791056",
     "source_urls": [
-      "https://langchain-ai.github.io/langgraph/",
-      "https://langchain-ai.github.io/langgraph/concepts/"
+      "curated"
     ]
   },
   "langgraph/latest/full": {
     "framework": "langgraph",
     "version": "latest",
     "level": "full",
-    "content_hash": "1c929d519093f98f",
-    "token_count": 296,
-    "snapshot_date": "2026-01-29T23:34:45.735230",
+    "content_hash": "ac75ff2248c58718",
+    "token_count": 322,
+    "snapshot_date": "2026-01-30T04:20:40.793442",
     "source_urls": [
-      "https://langchain-ai.github.io/langgraph/",
-      "https://langchain-ai.github.io/langgraph/concepts/",
-      "https://langchain-ai.github.io/langgraph/how-tos/",
-      "https://langchain-ai.github.io/langgraph/reference/"
+      "curated"
+    ]
+  },
+  "openai-agents/latest/minimal": {
+    "framework": "openai-agents",
+    "version": "latest",
+    "level": "minimal",
+    "content_hash": "7a90b0aa3970a39d",
+    "token_count": 42,
+    "snapshot_date": "2026-01-30T04:24:25.681822",
+    "source_urls": [
+      "generated"
+    ]
+  },
+  "openai-agents/latest/moderate": {
+    "framework": "openai-agents",
+    "version": "latest",
+    "level": "moderate",
+    "content_hash": "6c491ff7c2102243",
+    "token_count": 223,
+    "snapshot_date": "2026-01-30T04:24:25.684323",
+    "source_urls": [
+      "curated"
+    ]
+  },
+  "openai-agents/latest/full": {
+    "framework": "openai-agents",
+    "version": "latest",
+    "level": "full",
+    "content_hash": "b924b1c398417e05",
+    "token_count": 403,
+    "snapshot_date": "2026-01-30T04:24:25.687061",
+    "source_urls": [
+      "curated"
+    ]
+  },
+  "anthropic-agents/latest/minimal": {
+    "framework": "anthropic-agents",
+    "version": "latest",
+    "level": "minimal",
+    "content_hash": "280a3eab3d0321cb",
+    "token_count": 35,
+    "snapshot_date": "2026-01-30T04:24:54.438100",
+    "source_urls": [
+      "generated"
+    ]
+  },
+  "anthropic-agents/latest/moderate": {
+    "framework": "anthropic-agents",
+    "version": "latest",
+    "level": "moderate",
+    "content_hash": "daa62fff694e1e94",
+    "token_count": 219,
+    "snapshot_date": "2026-01-30T04:24:54.440780",
+    "source_urls": [
+      "curated"
+    ]
+  },
+  "anthropic-agents/latest/full": {
+    "framework": "anthropic-agents",
+    "version": "latest",
+    "level": "full",
+    "content_hash": "a4f6695e44ea251b",
+    "token_count": 392,
+    "snapshot_date": "2026-01-30T04:24:54.443418",
+    "source_urls": [
+      "curated"
     ]
   }
 }
